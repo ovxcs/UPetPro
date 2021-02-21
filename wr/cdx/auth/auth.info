@@ -1,0 +1,17 @@
+OAUTH LOGIN
+
+
+C:
+    request for login with provider
+
+S:
+    test for cookie
+    if (!cookie)
+        redirect to provider dialog page
+        if (oauth login ok)
+            land on "login2.php"
+        
+        
+        
+
+

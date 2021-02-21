@@ -1,0 +1,41 @@
+<script src="uploader/uploader.js"></script>
+<link rel="stylesheet" type="text/css" href="uploader/uploader.css">
+
+
+<div id="models" style="display:none">
+    <div class="uploader__td_div">
+    <img style="max-width:100%;" src="">
+    <div style="z-index:300">
+        <label class="delete_cell" onclick="UploaderInst().table.remove_cell(this)" style="display:none">&#10007;</label>
+        <label class="check_default" onclick="UploaderInst().table.mark_default(this, true)" style="display:none">&#x2713;</label>
+    </div>
+    </div>
+</div>
+
+<div style="height:100%;width:100%;">
+<div id="pics_nav_menu" style="z-index:200;width:100%;
+    display:flex;flex-direction:row;items-align:right;overflow-y:visible;">
+<span style="flex:20;max-height:1px:background:green"></span>
+
+<span id='uploader__more_btn'
+        onclick='this.getElementsByTagName("input")[0].click()'>
+        <span id="uploader__no_pict" data-ci="no_pics_uploaded_yet"
+            style="color:white;border:none;cursor:pointer;font-weight:10;font-size:24px;font-family:Arial">
+            No pics uploaded yet! Press this button
+        </span>
+        &plus;
+    <input type="file" name="fileToUpload" id="inp_upload" style='display:none'
+                onchange = 'UploaderInst().selection_done(this)' multiple>
+</span>
+
+<span id='uploaderCloseBtn' onclick='UploaderInst().on_win_close()'>&times;
+</span>
+
+</div>
+
+<div id='pics_uploader' style="font-size:20px;width:100%;height:100%;
+                    border-collapse:collapse;position:relative;margin-top:30px">
+    <div class='uploader__row'></div>
+</div>
+</div>
+

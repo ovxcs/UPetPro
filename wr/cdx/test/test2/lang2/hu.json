@@ -1,0 +1,17 @@
+{
+    "product_name": "Product name",
+    "name_model": "name, model/vers",
+    "location": "Location",
+    "description": "Description",
+    "year": "Year",
+    "yyyy": "YYYY",
+    "city_country": "City, Country",
+    "select_product": "Select product",
+    "add_new_product": "Add new",
+    "place_product": "Place product",
+    "register_only": "Register only",
+    "no_picture": "No picture!",
+    "no_product_yet": "You have no registred product yet",
+    "product_name_not_set": "Product name not set!",
+    "offer_placed_Ends_on": "Offer placed! Ends "
+}

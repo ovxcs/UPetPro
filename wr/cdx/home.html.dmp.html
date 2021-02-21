@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+
+
+
+
+
+
+
+<!-- script src='ui/top_bar_toggler2.js'></script -->
+<!-- script src='users/session.js'></script -->
+
+
+
+
+
+<!--script src='common/common.js'></script -->
+
+<!--script src='aucts/products_placements.js'></script-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+//------------------------ SEARCH BAR ---------------------------------------------------
+function toggle_search_bar(){ //!!!very hardcoded
+    var sbh = document.querySelector('#search_bar_holder');
+    var arrows = document.querySelectorAll('#menu_search_button span');
+    var arrow_right = arrows[0]; var arrow_left = arrows[1];
+    var sbh_d = getComputedStyle(sbh, null).getPropertyValue('display');
+    sbh.style.display = (sbh_d === 'none') ? 'block' : 'none';
+    arrow_left.style.display = (sbh_d === 'none') ? 'inline' : 'none';
+    arrow_right.style.display = (sbh_d === 'none') ? 'none' : 'inline';
+}
+//window.addEventListener('load', toggle_search_bar);
+//----------------------- MENU DROPDOWN SWITCH ARROW -----------------------------------
+window.addEventListener('load', function(){
+    document.querySelector('#menu_buttons_dropdown').addEventListener(
+            'toggle_dropdown_event', function(e){
+        //console.log(e.target.id, e.detail.status);
+        document.querySelector('#menu_dropdown button span').innerHTML = 
+            e.detail.status === 'none' ? '&#xFE40;' : '&#xfe3f;';
+        
+    });
+});
+//------------------------ TOP TOGGLER --------------------------------------------------
+/*//TopBarToggler(middle_selector, top_selector, items_to_exchange, callback);//
+
+window.addEventListener('load', function(){
+    new TopBarToggler('#middle__bar_widget_holder', '#top__bar_widget_holder');
+});
+*/
+</script>
+
+<link rel="stylesheet" type="text/css" href="/cdx/site.css">
+<link rel="stylesheet" type="text/css" href="/cdx/common/default__top.css">
+<script src="/cdx/vendor/es6-promise/es6-promise.auto.min.js"></script>
+<script src="/cdx/vendor/fetch/fetch.js"></script>
+<script src="/cdx/utils/time.js"></script>
+<script src="/cdx/utils/utils.js"></script>
+<script src="/cdx/lang/lang.js"></script>
+<script src="/cdx/ui/wins_manager.js"></script>
+<script src="/cdx/ui/top_toggler.js"></script>
+<script src="/cdx/wip/wip.js"></script>
+<script src="/cdx/aucts/aucts.js"></script>
+<script src="/cdx/users/session.js"></script>
+<script src="/cdx/ui/ui.js"></script>
+<script src="/cdx/ui/top_bar_toggler2.js"></script>
+<script src="/cdx/cdx/ui/builder_test.js"></script>
+<meta class="dictionaries" content="/cdx/common/lang">
+</head>
+
+<style>
+#user_profile_components{
+    display:inline-block;
+}
+</style>
+
+<body style="margin:0;padding:0;background:#DDDDDD;visibility:visible;">
+
+<div id="xhr_errors" style="color:red;text-align:center">
+</div>
+
+
+<div class="component_holder" data-src="/cdx/common/default__top.html">
+<div id="top__bar_widget_holder" style="z-index:90;position:fixed;top:-150px;
+            padding-top:5px;
+            padding-left:5px;
+            width:100%;text-align:left;">
+</div>
+
+<div id="home_top" style="margin:auto;top:0px;width:100%;z-index:10">
+    <div id="home_header">  
+        <div class="upc_holder">
+            <span id="user_profile_components" style="z-index:1000;width:100%;">
+            </span>
+        </div>
+        <div class="logo">
+            <div> <span>the</span>site</div>
+        </div>
+    </div>
+    <br>
+
+    <div id="middle__bar_widget_holder">
+
+
+<div id="__bar_widget__" style="padding-bottom:5px;position:relative">
+    <div id="__bar_widget__inner" style="display:inline-flex;width:97vw;align-items:center;">
+        <div style="display:inline-flex;max-height:40px;align-items:stretch;">
+            <div id="bar_widget_logo" style="display:none;overflow:hidden;">
+                <div style="">
+                    <div style="font-size:10px;">the</div>&nbsp;site
+                </div>
+            </div>
+
+            <div class="menu_settings" style="display:flex;flex-direction:column"> <!-- flex style for IE -->
+                <button style="padding:0 10px 0 10px;margin-right:5px" onclick="toggle_dropdown('#menu_settings_list');">
+                    &#9776;
+                </button>
+                <div style="max-height:0px;max-width:0;">
+                    <div class="dropdown" id="menu_settings_list" style="width:150px;background:black;">
+                        <button>
+                            <span style="flex:1">&#128100;</span>&nbsp;
+                            <label style="flex:5">Profile</label>
+                        </button>
+                        <button>
+                            <span style="flex:1">&#127760;</span>&nbsp;
+                            <label style="flex:5">
+                                <div data-ci="language_name" style="width:100%">qwdjcms</div>
+                                <div style="width:100%;font-size:10px"> language / &Ntilde;&#143;&ETH;&middot;&Ntilde;&#139;&ETH;&ordm; </div>
+                            </label>
+                        </button>
+                            
+                        <button>
+                            <span style="flex:1">&#128168;</span>&nbsp;
+                            <label style="flex:5">Logout</label>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="menu_dropdown" style="display:flex;flex-direction:column"> <!-- flex style for IE -->
+                <button onclick="toggle_dropdown('#menu_buttons_dropdown');">
+                    <span style="font-size:20px;">&#65088;</span>
+                    <span style="font-size:12px;padding-top:12px">menu</span>
+                </button>
+                <div style="max-height:0px;max-width:0">
+                    <div class="dropdown" id="menu_buttons_dropdown" style="width:150px;background:black;color:white">
+                        <button data-ci="offers" onclick="show_win__products_placements()"> Offers </button>
+                        <button data-ci="place_product" onclick="show_win__product_registration(true)"> Place&nbsp;product </button>
+                        <button data-ci="my_inventory" onclick="show_win__inventory()"> My&nbsp;inventory </button>
+                        <!-- button
+                            onclick="test_async()"> Test async </button>
+                        <button
+                            onclick="local_dt_from_serv_ts(
+                                1547274310).then(console.log).catch(console.log)"> Server TS
+                        </button -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="menu_buttons">
+                <button data-ci="offers" onclick="show_win__products_placements()"> Offers </button>
+                <button data-ci="place_product" onclick="show_win__product_registration(true)"> Place&nbsp;product </button>
+                <button data-ci="my_inventory" onclick="show_win__inventory()"> My&nbsp;inventory </button>
+                <!-- button
+                    onclick="test_async()"> Test async </button>
+                <button
+                    onclick="local_dt_from_serv_ts(
+                        1547274310).then(console.log).catch(console.log)"> Server TS
+                </button -->
+            </div>
+
+            <div id="menu_search_button">
+                <button style="font-size:27px;padding:0;margin-left:10px" onclick="toggle_search_bar()">
+                    &nbsp;&#8981;<span>&rsaquo;</span><span>&lsaquo;</span>&nbsp;
+                </button>
+            </div>
+            <script>
+
+            </script>
+        </div>
+        
+        <div id="search_bar_holder">
+            <div id="search_bar_itself" style="display:inline-flex;align-items:stretch;">
+                <input style="" type="text" placeholder="Search ...">
+                <button style="">search</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    </div>
+</div>
+</div>
+<div class="component_holder"></div>
+
+<br>asdff<br>qwrqr<br>asrtdv<br>hgfhdfgj<br>ertywer<br>vadscktkkk<br>ooopppo<br>qqaqaqa<br>qwdqwd<br>qwdeqw<br>gte<br>mmmmmm<br>$$$$<br>777777<br>
+<br>asdff<br>qwrqr<br>asrtdv<br>hgfhdfgj<br>ertywer<br>vadscktkkk<br>ooopppo<br>qqaqaqa<br>qwdqwd<br>qwdeqw<br>gte<br>mmmmmm<br>$$$$<br>777777<br>
+<br>asdff<br>qwrqr<br>asrtdv<br>hgfhdfgj<br>ertywer<br>vadscktkkk<br>ooopppo<br>qqaqaqa<br>qwdqwd<br>qwdeqw<br>gte<br>mmmmmm<br>$$$$<br>777777<br>
+<br>asdff<br>qwrqr<br>asrtdv<br>hgfhdfgj<br>ertywer<br>vadscktkkk<br>ooopppo<br>qqaqaqa<br>qwdqwd<br>qwdeqw<br>gte<br>mmmmmm<br>$$$$<br>777777<br>
+<br>asdff<br>qwrqr<br>asrtdv<br>hgfhdfgj<br>ertywer<br>vadscktkkk<br>ooopppo<br>qqaqaqa<br>qwdqwd<br>qwdeqw<br>gte<br>mmmmmm<br>$$$$<br>777777<br>
+<br>asdff<br>qwrqr<br>asrtdv<br>hgfhdfgj<br>ertywer<br>vadscktkkk<br>ooopppo<br>qqaqaqa<br>qwdqwd<br>qwdeqw<br>gte<br>mmmmmm<br>$$$$<br>777777<br>
+
+<div style="background:blue">ffdffff</div>
+
+<div class="component_holder" data-src="/cdx/common/bottom.html">  <div style="width:100%;background:orange;color:green"> BOTTOM 3 CONTENT </div>
+</div>
+
+</body>
+
+<script>
+
+
+</script>
+</html>

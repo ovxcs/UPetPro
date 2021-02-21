@@ -1,0 +1,52 @@
+@import "/cdx/vars.css";
+
+html, body{
+    margin:0;
+    padding:0;
+}
+
+#home_top{
+    background:linear-gradient(to top right, red, yellow);
+    font-size:20px;
+    transition: max-height 1s ease-out;
+}
+
+
+
+#bar_logo{
+    background: linear-gradient(to top right, red, yellow);
+    color: brown;
+    padding: 0 5px 0 5px;
+    margin: 0 5px 0 5px;
+}
+/*END BAR WIDGET*/
+
+#home_top .logo{
+    display: block;
+    color: #662211;
+    text-align: left;
+    background-image: url("/res/_/tools1/red2.png");
+    background-size: 150px;
+    background-repeat: no-repeat;
+    background-position: right;
+    margin: auto;
+    width: 270px;
+    height: 120px;
+    border: 1px solid black;
+}
+
+#home_top .logo div{
+    margin-top: 40px;
+    font-size: 50px;
+    font-family: monospace;
+    font-weight: bold;
+    background: rgba(200,0,0,0.5);
+    padding-left: 20px;
+}
+
+#home_top .logo div span{
+    color: brown;
+    font-size: 18px;
+    font-family: Arial;
+    font-weight: lighter;
+}

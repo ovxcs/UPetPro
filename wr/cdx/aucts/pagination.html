@@ -1,0 +1,58 @@
+<link rel='stylesheet' href='/cdx/aucts/pagination.css'>
+<script src='/cdx/aucts/pagination.js'></script>
+
+<div class="___pagesSelector___"
+            style="display:flex;
+            flex-wrap:nowrap;
+            margin:auto;
+            justify-content:center;">
+    <div class="selectWrap" style="text-align:right;">
+        <!--label style="font-size:10px;display:none">
+            &#x2264;
+        </label-->
+        <select class="pasts">
+            <option value="s20">20 sec</option>
+            <option value="m2" > 2 min</option>
+            <option value="h1" > 1 h</option>
+            <option value="D1" > 1 day</option>
+            <option value="D7" > 7 days</option>
+            <option value="M1" > 1 month</option>
+            <option value="Y1" > 1 year</option>
+            <option value="A"  > all </option>
+        </select>
+    </div>
+    <div style="display:flex;
+            align-items:stretch;
+            margin:0px 5px 0px 5px;
+            padding:2px;">
+        <div class="arrows" style="flex:2;
+                text-align:right;
+                display:flex">
+            <span>&#x300A;</span>
+            <span>&#x276E;</span>
+        </div>
+        <div class="list" style="display:flex;">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span class="current">4</span>
+            <span>5</span>
+            <span>6</span>
+        </div>
+        <div class="arrows" style="flex:2;
+                display:flex">
+            <span>&#x276F;</span>
+            <span>&#x300B;</span>
+        </div>
+    </div>
+    <div class="selectWrap">
+        <select class="perPage" dir="rtl">
+            <option>5</option>
+            <option>10</option>
+            <option>20</option>
+            <option>100</option>
+            <option>200</option>
+        </select>
+        <!--span class="total">1201</span-->
+    </div>
+</div>

@@ -1,0 +1,158 @@
+<div id="picts_viewer" style="margin:auto;text-align:center">
+    <button id="pict_viewer_close">
+            &times;
+    </button>
+    <span style="display:inline-flex;background:gray">
+        
+        <!-- button>&lt;</button-->
+        <table><tr>
+        </tr></table>
+        <!-- button>&gt;</button-->
+    </span>
+    <br>
+    <br>
+    <div id="picts_viewer_big_img">
+        <img style="max-height:70%;max-width:90%" src="">
+    </div>
+</div>
+
+<style>
+#picts_viewer button{
+    background:none;
+    border:none;
+    color:white;
+    font-size:25px;
+}
+#picts_viewer button:hover{
+    background:black;
+}
+#picts_viewer #pict_viewer_close{
+    float:left;
+    font-size:40px;
+    margin:10px;
+    color:orange;
+    border:none;
+    curosor:pointer;
+    background:none;
+    padding:0px 5px 0px 5px;
+}
+#picts_viewer #pict_viewer_close:hover{
+    background:red;
+    color:white;
+}
+
+#picts_viewer_big_img{
+    border: 1px solid gray;
+    display:inline-block;
+    padding:5px;
+}
+
+#picts_viewer table td img{
+    margin: 2px;
+    cursor: pointer;
+}
+
+#picts_viewer table td{
+    border: 2px solid rgba(0,0,0,0);
+    border-radius:5px;
+}
+#picts_viewer table td.selected{
+    border-color: orange;
+}
+
+#picts_viewer table td:hover{
+    border-color:#FFCCAA;
+}
+
+0123456789abcdef
+
+
+
+</style>
+
+<script>
+
+function PictsViwer(list_length){
+    var self = this;
+    var viewer = document.querySelector("#picts_viewer");
+    var table = viewer.querySelector("table");
+    var row = table.querySelector("tr");
+    var big_img = viewer.querySelector('img');
+    if (!list_length) list_length = 5;
+
+    this.create_nav_list = function(list, index){
+        row.innerHTML = '';
+        var start = index - Math.floor(list_length/2);
+        if (start < 0) start = 0;
+        var iw = window.innerWidth;
+        var img_max_width = Math.min(50, Math.floor(iw*0.95/list_length) - 8);
+        img_max_width = '' + img_max_width + 'px';
+        //console.log(img_max_width);
+        for (var i = 0; i < list_length; i++){
+            var td = row.insertCell(-1);
+            var img = document.createElement('IMG');
+            var ix = start + i;
+            if (ix >= list.length) break;
+            img.src = list[ix];
+            img.style.maxWidth = img_max_width;
+            td.appendChild(img);
+            if (ix === index) td.classList.add('selected');
+            td.onclick = function(ev){ self.navigate_to(ev, list); }
+            td.__index__ = ix;
+        }
+    }
+
+    function __extract_ix(ix_or_ev){
+        if (!isNaN(ix_or_ev)){
+            return parseInt(ix_or_ev);
+        }
+        var target = ix_or_ev.target;
+        while(target.parentNode && target.tagName != 'TD')
+            target = target.parentNode;
+        return target.__index__;
+    }
+
+    this.navigate_to = function(ix_or_ev, list){
+        var ix = __extract_ix(ix_or_ev)
+        //console.log("navigate to", ix_or_ev);
+        this.create_nav_list(list, ix);
+        big_img.src = list[ix];
+    }
+    
+
+}
+
+var __picts_viewer_inst = 0;
+function PictsViwerInst(){
+    if (!__picts_viewer_inst) __picts_viewer_inst = new PictsViwer();
+    return __picts_viewer_inst;
+}
+
+var picts_list = [
+    "/test/viewer/camera-icon.png",
+    "/test/viewer/camera-icon2.png",
+    "/test/viewer/camera-icon3.jpg",
+    "/test/viewer/camera-icon3.png",
+    "/test/viewer/ed.jpg",
+    "/test/viewer/europe_map1_4.gif",
+    "/test/viewer/facebook.jpg",
+    "/test/viewer/fruncia.png",
+    "/test/viewer/google.jpg",
+    "/test/viewer/Halep-Win.jpg",
+    "/test/viewer/image.jpg",
+    "/test/viewer/linkedin.jpg",
+    "/test/viewer/Mapa.gif",
+    "/test/viewer/microsoft.jpg",
+    "/test/viewer/microsoft2.jpg",
+    "/test/viewer/microsoft3.jpg",
+    "/test/viewer/microsoft4.jpg",
+    "/test/viewer/oauth-logo-square.png",
+    "/test/viewer/person.jpg",
+    "/test/viewer/person.png",
+    "/test/viewer/red2.png",
+]
+
+//g_picts_viewer = new PictsViwer(9);
+//g_pw.navigate_to(9, picts_list);
+
+</script>

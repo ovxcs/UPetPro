@@ -1,0 +1,222 @@
+@import "/cdx/vars.css";
+
+/*for other components*/
+#home_header{ display:none; }
+#home_top{ position:fixed; }
+/**/
+
+body{background:white;}
+
+.products__table{
+    border-collapse:collapse;
+    margin:auto;
+    background:white;
+    font-family:Arial;
+    color: var(--products__color1);
+}
+
+.products__grid_cell{
+    border:1px solid var(--products__borders);
+    border-radius:3px;
+    margin:3px 3px 3px 3px;
+    background:var(--products__cell_bgc);
+    max-width:600px;
+    font-family:Arial;
+}
+
+.products__grid_cell:hover{
+    background: var(--products__sel_row);
+}
+
+.products__grid_cell:focus-within{
+    background: var(--products__focused_cell);
+}
+
+.cell__first_comp{
+    max-width:300px;
+    margin-left:1px;
+}
+
+.products__grid_cell img{
+    width:300px;
+    height:200px;
+}
+
+.cell__second_comp{
+    padding:3px;
+}
+
+.cell__second_comp .card{
+    border:1px solid var(--products__borders2);
+    border-radius:5px;
+    padding:5px;
+    margin:3px;
+    /*min-width:150px;*/
+}
+
+.cell__second_comp .card > div{
+    width:160px;
+    box-sizing:border-box;
+}
+
+.cell__second_comp .card > div:nth-of-type(odd){
+    font-size:14px;
+    padding-left:15px;
+}
+.cell__second_comp .card > div:nth-of-type(even){
+    font-family:georgia;
+    font-size:16px;
+    text-align:right;
+    padding-right:15px;
+}
+
+
+.cell__second_comp .card .products__eta{
+    text-align:center;
+    font-family:"Lucida Console", Monaco, monospace
+}
+
+.cell__third_comp{
+    margin: 0px 0px 2px 5px;
+    max-width:190px;
+}
+
+.cell__third_comp .name{
+    /*font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;*/
+    font-size:14px;
+    display:block;
+}
+
+
+
+@media only screen and (max-width: 750px) {
+    .products__grid_cell{
+        flex-direction:column;
+        margin:0 auto 10px auto;
+        max-width:350px;
+    }
+    .cell__first_comp{
+        order:2;
+        max-width:350px;
+    }
+    .cell__first_comp img{
+        width:350px;
+        height:220px;
+    }
+    .cell__third_comp{
+        order:1;
+        max-width:340px;
+        width:340px;
+        margin:auto;
+    }
+    .cell__second_comp{
+        order:3;
+        width:300px;
+        margin:auto;
+    }
+    .cell__second_comp .card{
+        align-items:center;
+    }
+    .cell__second_comp .card > div{
+        margin:auto;
+        width:200px;
+    }
+}
+
+
+.bid__valut{
+    font-family:georgia;
+    font-size:15px;
+    font-weight:bold;
+    color:var(--products__color2);
+}
+
+.bid__inputs {
+    font-size:16px;
+}
+
+.bid__inputs input, .bid__inputs button{
+    padding-top:3px; padding-bottom:3px;
+    font-size:16px;
+    border:1px solid green;
+    text-align:center;
+}
+
+.bid__inputs input{
+    font-family:georgia;
+    background:#DDFFEE;
+    border-right:none;
+}
+
+.bid__inputs button{
+    cursor:pointer;
+    font-family:arial;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    background:#66AA99;
+    color:#bbFEEE;
+}
+
+.bid__inputs button:hover{
+    color:white;
+}
+
+.bid__inputs span{
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+.bid__errors{
+    width:100%;
+    text-align:center;
+    color:red;
+    padding:4px;
+    font-size:16px;
+    font-family:Arial;
+    margin-top:5px;
+    display:block;
+}
+
+.no_pict_alt{
+    background:gray;
+    color:white;
+    text-align:center;
+    padding: 30px 0 30px 0;
+    margin: 0 50px 0 50px;
+    border-radius:5px;
+    /*border:3px dashed #DDDDDD;*/
+}
+
+.wordwrap{
+    white-space: pre-wrap;      /* CSS3 */   
+    white-space: -moz-pre-wrap; /* Firefox */   
+    white-space: -o-pre-wrap;   /* Opera 7 */    
+    word-wrap: break-word;      /* IE */
+    text-align:center;
+}
+
+.bookmark div:nth-child(1){
+    display:block;
+}
+
+.bookmark div:nth-child(2){
+    display:none;
+}
+
+.bookmark.bookmarked div:nth-child(1){
+    display:none;
+}
+
+.bookmark.bookmarked div:nth-child(2){
+    display:block;
+    color:orange;
+}
+
+.evaluation_circles{
+    color:#800000;
+}
+
+.evaluation_circles span:nth-child(2){
+    color:silver;
+}
+

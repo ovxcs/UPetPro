@@ -1,0 +1,24 @@
+<html>
+<body>
+
+<p>Click the button to display the date and time as a string.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<span id="demo" style="font-family:monospace"></span>
+
+<script>
+function myFunction(delta_days) {
+  var ts = Date.now();
+  var tsms = Math.floor(ts + 24 * 3600 * delta_days * 1000);
+  var d = new Date(tsms);
+  var n = d.toString();
+  var ar = d.getDay() + ', ' + d.getMonth() +', '+d.getHours();
+  document.getElementById("demo").innerHTML += ('<br>' + n + " ---- " + ar);
+}
+for(var d = 0; d < 400; d += 10.1111111111)
+    myFunction(d);
+</script>
+
+</body>
+</html>

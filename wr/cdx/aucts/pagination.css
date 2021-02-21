@@ -1,0 +1,91 @@
+.___pagesSelector___ .list,
+.___pagesSelector___ .arrows{
+    align-items:stretch;
+}
+
+.___pagesSelector___ .list span,
+.___pagesSelector___ .arrows span{
+    font-family:Arial;
+    font-size:20;
+    padding:10px;
+    cursor:pointer;
+    border:0px;
+    outline:0px;
+    border-radius:5px;
+    background:gray;
+    color:#CCCCCC;
+    margin:2px;
+    width:25px;
+    text-align:center;
+}
+
+.___pagesSelector___ .list span:hover,
+.___pagesSelector___ .arrows span:hover{
+    font-weight:bold;
+}
+
+.___pagesSelector___ .list span.current{
+    color:white;
+    font-weight:bold;
+}
+
+@media only screen and (max-width: 750px) {
+    .___pagesSelector___ .list span:nth-of-type(n+4){
+        display:none;
+    }
+}
+
+.___pagesSelector___ .selectWrap{
+    background:gray;
+    color:#CCCCCC;
+    border-radius:5px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    margin: 4px 0 4px 0;
+}
+
+.___pagesSelector___ select{
+    color:inherit;
+    background:inherit;
+    font-family:Arial;
+    font-size:15;
+    padding:5px;
+    border:none;
+}
+
+.___pagesSelector___ select option{
+    font-size:20px;
+}
+
+.___pagesSelector___ select.pasts{
+    font-size:12px;
+    font-family:Georgia;
+}
+
+.___pagesSelector___ select.pasts option{
+    font-size:25px;
+}
+
+.___pagesSelector___{
+    color:fuchsia;
+}
+
+.___pagesSelector___ select{
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Chrome */
+    -webkit-appearance: none;
+}
+
+/* For IE10 */
+.___pagesSelector___ select::-ms-expand{
+    display: none;
+}
+
+.___pagesSelector___ .total{
+    font-family:Arial;
+    font-size:12px;
+    color:white;
+}

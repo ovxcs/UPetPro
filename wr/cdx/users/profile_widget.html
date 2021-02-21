@@ -1,0 +1,38 @@
+<div id="user_profile_widget" style="float:right">
+<table style="background:rgba(255,255,255,0.5); border-bottom-left-radius:10px;"><tr>
+    <td valign="middle">
+        <img id="profile__user_pict" height="48" style="border-radius:10px;padding-top:5px;padding-left:5px" alt=" " src=""/>
+    </td>
+    <td style="font-size:10px">
+        &nbsp;&nbsp;<span id="profile__user_name"
+            style="font-size:16px;font-family:Arial;color:brown;cursor:pointer;"
+            onclick="profile__post_request_page()"></span>
+        <div style="text-align:right;display:block;" id="profile__activ_stat">
+            &nbsp;&nbsp; <span data-ci="not_activated"
+                    style="font-family:Arial;font-size:10px;color:red">
+                not activated
+            </span>
+        </div>
+        <div style="text-align:right;display:block;" id="profile__provider">
+            &nbsp;&nbsp; <span data-ci="not_activated"
+                    style="text-transform:capitalize;font-family:Arial;font-size:11px;color:grey">
+                provider
+            </span>
+        </div>
+        <div style="text-align:right;margin-top:5px">
+            <!-- <span onclick="profile()" style="text-align:right;cursor:pointer">Profile</span> -->
+            &nbsp;&nbsp; <span class="logout" onclick='window.location.replace("/auth/logout.php")'
+                    style="text-align:right;cursor:pointer;font-family:Arial;font-size:14px">
+                logout
+            </span>
+        </div>
+    </td>
+</tr></table>
+<div id="user_profile_widget_form_holder" style="max-height:3px">
+<form method="POST" name="user_profile_widget_form" action="/users/profile.html.php">
+  <input type="hidden" name="profile_req" value='win'><br>
+  <input type="hidden" name="firstname" value="Mickey"><br>
+  <input type="hidden" name="lastname" value="Mouse"><br>
+</form>
+</div>
+</div>

@@ -1,0 +1,409 @@
+<meta charset="utf-8">
+<link rel="stylesheet" href="/cdx/common/my_site.css">
+
+<style>
+
+#languages_favorites{
+    margin:10px;
+    border:1px solid orange;
+    border-radius:5px;
+}
+
+.languages_column div{
+    display:flex;
+    text-align:center;
+    margin:3px;
+    width:300px;
+    align-content:center;
+    align-items:center;
+    height:50px;
+    color:#556655;
+    border:1px solid white;
+    transition: background .2s;
+}
+
+.languages_column div span{
+    flex:1;
+    text-align:center;
+    font-family:Courier;
+    font-size:25px;
+    font-weight:bold;
+    font-stretch:ultra-expanded;
+    color:#AACCBB;
+    margin:2px;
+
+    /*border:1px solid #ccFFEE;*/
+    border-radius:5px;
+}
+
+.languages_column div span:nth-child(2){
+    color:#8899FF;
+}
+.languages_column div span:nth-child(2):hover{
+    color:#666688;
+}
+.languages_column div span:nth-child(3){
+    color:gold;
+}
+.languages_column div span:nth-child(3):hover{
+    color:#BBBB00;
+}
+
+#languages_favorites div:first-child label{
+    /*text-decoration:underline;*/
+}
+#languages_favorites div:first-child{
+    border-bottom:1px solid gold;
+    border-radius:0px;
+}
+#languages_favorites div:first-child span:nth-child(3),
+#languages_favorites div:first-child span:nth-child(3):hover{
+    color:#FFEE77;  /*the chosen*/
+}
+#languages_favorites div span:nth-child(2){
+    color:#EE9988;
+}
+#languages_favorites div span:nth-child(2):hover{
+    color:#886644;
+}
+#languages_favorites div span:nth-child(3){
+    display:inline;
+    color:#AAEEBB;
+}
+#languages_favorites div span:nth-child(3):hover{
+    color:#668877;
+}
+
+.languages_column div[selected_language="TRUE"]{
+    color:#008844;
+    font-weight:bold;
+}
+
+#languages_favorites div.moving{
+    background: #EEEEEE;
+    transition: background .2s
+}
+
+.languages_column div label {
+    flex:2;
+    padding:10px 0 10px 2px;
+    font-family:Arial;
+    font-size:20px;
+    text-align:left;
+    cursor:pointer;
+    color:var(--label_color);
+}
+
+.languages_column div:hover{
+    background:#EEEEEE;
+    cursor:pointer;
+}
+
+div.languages_selected_cell{
+    border:1px dotted gray;
+    border-radius:10px;
+}
+
+#languages_selection_close{
+    font-size:40px;
+    font-family:Arial;
+    background:#CCCCCC;
+    border:none;
+    color:white;
+    padding: 0 15px 0 15px;
+}
+
+#languages_selection_close:hover{
+    background:#FF6666;
+    color:white;
+    cursor:pointer;
+}
+
+.languages_column{
+    overflow-x:hidden;
+}
+
+#languages_table{
+    flex-direction:row;
+}
+
+#languages_dialog{
+    width:80%;
+    overflow-y:auto;
+    background:white;
+    border:1px solid var(--card_border_color);
+    border-right:2px solid var(--card_border_color);
+    border-radius:25px;
+}
+
+.languages_tab_button{
+    border:none;
+    border-right:1px solid gray;
+    cursor:pointer;
+}
+
+.languages_tab_button_selected{
+    /*background:#66FFEE;*/
+    background:white;
+}
+
+@media only screen and (max-width:7in){
+    #languages_table{
+        flex-direction:column;
+    }
+}
+
+@media only screen and (min-width:7in){
+    #languages_dialog{
+        width:700px;
+    }
+}
+
+#languages_selector_win{
+    background:rgba(80, 80, 80, 0.8);
+}
+
+body.modal-open{
+    overflow-y:hidden;
+}
+</style>
+
+<div id="languages_selector_win" style="display:none;position:fixed;top:0;left:0;z-index:99999;
+            width:100%;height:100%;overflow-y:auto">
+<div id="languages_dialog" style="margin:auto;margin-top:30px;margin-bottom:30px;padding-bottom:20px">
+    <div style="width:100%;font-family:Arial;text-align:right">
+        <div style="text-align:right;">
+            <button id="languages_selection_close" onclick='languages_selector_win__closing()'>
+                &times;
+            </button>
+        </div>
+    </div>
+    <div id="languages_table" class="languages_tab" style="display:flex;justify-content:center;">
+        <div class="languages_column" id="languages_favorites">
+            <!--div id="lang__de"> <label> deutsch </label> <span>-</span><span>^</span></div>
+            <div id="lang__en"> <label> english </label> <span>-</span><span>^</span></div>
+            <div id="lang__es"> <label> español </label> <span>-</span><span>^</span></div>
+            <div id="lang__fr"> <label> français </label><span>-</span><span>^</span></div>
+            <div id="lang__hu"> <label> magyar </label>  <span>-</span><span>^</span></div>
+            <div id="lang__ro"> <label> română </label>  <span>-</span><span>^</span></div -->
+        </div>
+        <div class="languages_column">
+            <!-- div id="lang__ro"> <label> română </label>  <span>+</span><span>1</span></div>
+            <div id="lang__ro"> <label> română </label>  <span>+</span><span>1</span></div>
+            <div id="lang__ro"> <label> română </label>  <span>+</span><span>1</span></div>
+            <div id="lang__ro"> <label> română </label>  <span>+</span><span>1</span></div>
+            <div id="lang__ro"> <label> română </label>  <span>+</span><span>1</span></div>
+            <div id="lang__ro"> <label> română </label>  <span>+</span><span>1</span></div>
+            <div id="lang__ro"> <label> română </label>  <span>+</span><span>1</span></div>
+            <div id="lang__ro"> <label> română </label>  <span>+</span><span>1</span></div>
+            <div id="lang__ro"> <label> română </label>  <span>+</span><span>1</span></div>
+            <div id="lang__ro"> <label> română </label>  <span>+</span><span>1</span></div -->
+        </div>
+    </div>
+</div> <!-- dialog -->
+</div> <!-- modal window -->
+
+
+<script>
+
+var ___LANGUAGES___ = {
+    'bg': 'български',
+    'pt': 'português',
+    'ro': 'română',
+    'hu': 'magyar',
+    'es': 'español',
+    'ru': 'русский',
+    'fr': 'français',
+    'en': 'english',
+    'de': 'deutsch',
+    'zh': '简体字'
+};
+
+var languages_list_button_add = '+';
+var languages_list_button_rem = '\u2212';
+var languages_list_button_up = '\ufe3f';
+var languages_list_button_first = '1';
+var languages_list_button_chosen = '\u2713';
+
+var LANGUAGES_DEFAULT_FAVS = ['ro', 'hu', 'en', 'es'];
+
+var __lpfc_evt = document.createEvent('Event');
+__lpfc_evt.initEvent('LanguagesPreferencesChanged');
+
+function languages_selector_win__show(flag){
+    if (flag) document.body.classList.add("modal-open");
+    else document.body.classList.remove("modal-open");
+    document.getElementById('languages_selector_win').style.display = flag ? 'block' : 'none';
+    if (!flag){ //dialog will be closed - save preferences
+        var favs = languages_grab_favs();
+        document.dispatchEvent(__lpfc_evt);
+        window.location.href = '/lang/lang.php?langs=' + favs['list'].join();
+    }
+}
+
+function languages_selector_win__closing(){
+    languages_selector_win__show(false);
+}
+
+function languages_grab_favs(){
+    var favs = {'modified': false, 'list':[]};
+    var fvs = document.getElementById('languages_favorites');
+    [].forEach.call(fvs.querySelectorAll('div'), function (cell){
+        lc = cell.getAttribute('lang_code');
+        favs['list'].push(lc);
+    });
+    //console.log(favs['list'], LANGUAGES_JSON['favs']);
+    //favs['modified'] = (JSON.stringify(favs['list']) !== JSON.stringify(LANGUAGES_JSON['favs']));
+    //console.log(favs);
+    return favs;
+}
+
+//the table is vertically oriented
+
+function languages_gui_from_json_list(json_list, is_fav, max_cells_per_col){
+    json_list.forEach(function (lang_code, ix){
+        var cel = document.createElement('DIV');
+        var cel_name = document.createElement('LABEL'); cel.append(cel_name);
+        cel_name.innerHTML = ___LANGUAGES___[lang_code];
+        cel.setAttribute('lang_code', lang_code);
+        var cel_bt1 = document.createElement('SPAN'); cel.append(cel_bt1);
+        var cel_bt2 = document.createElement('SPAN'); cel.append(cel_bt2);
+        if (is_fav){
+            cel_bt1.innerHTML = languages_list_button_rem;
+            cel_bt2.innerHTML = ix ? languages_list_button_up : languages_list_button_chosen;
+            var favs = document.getElementById('languages_favorites');
+            favs.append(cel);
+        }else{
+            cel_bt1.innerHTML = languages_list_button_add;
+            cel_bt2.innerHTML = languages_list_button_first;
+            var cols = document.getElementsByClassName('languages_column');
+            var col;
+            if ( cols.length === 0 || (max_cells_per_col &&
+                            cols[cols.length - 1].children.length >= max_cells_per_col) ){
+                col = document.createElement('DIV');
+                col.classList.add('languages_column');
+                document.getElementById("languages_table").append(col)
+            }else{
+                col = cols[cols.length - 1];
+            }
+            col.append(cel);
+        }
+    });
+}
+
+function languages_gui_from_json(json){
+    languages_gui_from_json_list(json, true);
+    var avail = Object.keys(___LANGUAGES___).sort();
+    json.forEach(function(l){
+        var ix = avail.indexOf(l);
+        if (ix > -1) avail.splice(ix, 1);
+    });
+    languages_gui_from_json_list(avail, false, 100);
+}
+
+function languages__readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+function languages_gui_init(){
+    var langs = languages__readCookie("langs");
+    //console.log(langs);
+    if (langs){
+        languages_gui_from_json(langs.split(
+                langs.indexOf(',') !== -1 ? ',' : "%2C"));
+    }else{
+        languages_gui_from_json(LANGUAGES_DEFAULT_FAVS);
+    }
+}
+
+function __languages_add_rem_or_pos(ev){
+    var sel_cell = ev.target.parentNode;
+    [].forEach.call(document.querySelectorAll('.languages_selected_cell'), function(c){
+        c.classList.remove('languages_selected_cell');
+    });
+    sel_cell.classList.add('languages_selected_cell');
+    sel_cell.classList.add('moving');
+    setTimeout(function(){sel_cell.classList.remove('moving')}, 100);
+    var sel_lang = sel_cell.firstElementChild.innerHTML.trim();
+    var kind = ev.target.innerHTML.trim();
+    //console.log(kind)
+    if (kind === languages_list_button_rem){
+        sel_cell.children[1].innerHTML = languages_list_button_add;
+        sel_cell.children[2].innerHTML = languages_list_button_first;
+        var columns = document.getElementsByClassName("languages_column");
+        for (var xc = 0; xc < columns.length; xc += 1){
+            if (xc === 0) continue; //skip fav;
+            var col = columns[xc];
+            var cells = col.getElementsByTagName("div");
+            for (var xd = 0; xd < cells.length; xd += 1){
+                var cell = cells[xd];
+                var lang = cell.firstElementChild.innerHTML.trim();
+                if (lang > sel_lang){
+                    col.insertBefore(sel_cell, cell);
+                    return;
+                }
+            }
+        }
+        columns[columns.length - 1].append(sel_cell);
+    } else if (kind === languages_list_button_up){
+        var favs = document.getElementById('languages_favorites');
+        var cells = favs.getElementsByTagName("div");
+        for (var xd = 0; xd < cells.length; xd += 1){
+            if (xd === 0) continue; //first can't be moved upper;
+            if(sel_cell === cells[xd]){
+                favs.insertBefore(sel_cell, cells[xd-1]);
+                return;
+            }
+        }
+    } else if (kind === languages_list_button_first){
+        var favs = document.getElementById('languages_favorites');
+        favs.insertBefore(sel_cell, favs.children[0]);
+        sel_cell.children[1].innerHTML = languages_list_button_rem;
+        sel_cell.children[2].innerHTML = languages_list_button_up;
+    } else if (kind === languages_list_button_add){
+        var favs = document.getElementById('languages_favorites');
+        favs.append(sel_cell);
+        sel_cell.children[1].innerHTML = languages_list_button_rem;
+        sel_cell.children[2].innerHTML = languages_list_button_up;
+    }
+}
+
+function languages_add_rem_or_pos(ev){
+    var favs = document.getElementById('languages_favorites');
+    var first = favs.children[0];
+    if (first){
+        first.children[2].innerHTML = languages_list_button_up;
+    }
+    var lang = first ? first.children[0].innerHTML.trim() : 0;
+    __languages_add_rem_or_pos(ev);
+    first = favs.children[0];
+    if (first){
+        first.children[2].innerHTML = languages_list_button_chosen;
+    }
+    var lang2 = first ? first.children[0].innerHTML.trim() : 0;
+    if (lang2 && lang2 != lang){
+        //new language selected as first favorite
+        //console.log(">>>", lang2);
+        var lc = first.getAttribute('lang_code');
+        translate_everything(lc, function(){
+            console.log("translated");
+        });
+    }
+}
+
+languages_gui_init();
+
+[].forEach.call(document.querySelectorAll(".languages_column span"), function(col){
+    col.addEventListener("click", function(evt) {
+        languages_add_rem_or_pos(evt);
+    }, false);
+});
+
+</script>

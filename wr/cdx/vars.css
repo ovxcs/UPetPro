@@ -1,0 +1,46 @@
+:root{
+    --home-menu-buttons-color:rgb(230,230,230);
+}
+
+:root{
+    --card_border_color:#99CCDD;
+    --label_color:#005588;
+}
+
+/*PRODUCTS LIST VARIABLES*/
+:root{
+    --products__color1: #006688;
+    --products__color2: #226600;
+    --products__borders: #99BBEE; 
+    --products__borders2: #AAAADD;
+    --products__sel_row: #FFFFEE;
+    --products__cell_bgc: #FFFBF8;
+    --products__focused_cell: #EEEEFF;
+}
+
+/*REGISTER PRODUCT VARIABLES*/
+:root{
+    --reg_prod_buttons_color:#0088BB;
+    --reg_prod_labels_color:#005588;
+    --loader_color:#FF6622;
+    --list_products_select_bg:#CCDDEE;
+    --reg_prod_borders:#99CCDD;
+    --reg_prod_bgc:#FFFFFF;
+    --reg_prod_win_bgc:rgba(180,180,180,0.98);
+    --reg_prod_offer_active:#00AA66;
+    --reg_prod_buttons_bgc_h:#00AA66;
+}
+
+/*REVIEWS VARIABLES*/
+:root{
+    --reviews__container_bgc:#777777;
+    --reviews__inps_bgc:#FFFBFB;
+    --reviews__2n1_bgc:#778899;
+    --reviews__2n1_bgc_border_top:3px solid #4499AA;
+    --reviews__2n1_bgc_border_right:3px solid #00bbcc;
+    --reviews__2n_bgc:#779988;
+    --reviews__2n_bgc_border_top:3px solid #44AA99;
+    --reviews__2n_bgc_border_right:3px solid #00ccbb;
+}
+
+

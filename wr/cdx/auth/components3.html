@@ -1,0 +1,38 @@
+<style>
+.card {
+    width:300px;
+    
+}
+.card .entry{
+    border: 1px solid black;
+    border-radius: 5px;
+    min-height:60px;
+}
+
+.card .entry input{
+    display:none;
+}
+
+.card .entry:hover input,
+.card .entry input:focus{
+    display:block;
+}
+
+.card .entry input[value=""]{
+    background:yellow;
+}
+
+.card .entry:hover input + div,
+.card .entry input:focus + div{
+    float:right;
+}
+
+</style>
+<div class="card">
+<div class="entry">
+    <input type="name">
+    <div class="placeholder">
+        PLACEHOLDER
+    </div>
+</div>
+</div>

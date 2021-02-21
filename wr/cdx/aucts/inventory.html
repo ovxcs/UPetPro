@@ -1,0 +1,61 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<script src="/cdx/lang/lang.js"></script>
+<script src="/cdx/utils/utils.js"></script>
+<meta class="dictionaries" content="lang">
+<script src="/cdx/utils/time.js"></script>
+<script src="/cdx/aucts/inventory.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="/cdx/aucts/inventory.css">
+
+<style>
+</style>
+
+<div id="inventory__models" style="display:none;">
+    <div class="row inventory__row" onclick="InventoryInst().open_item(this)">
+        <div class="numbers">
+            <span> 17 </span> <br>
+            <span style="font-size:10px;color:#aaaaaa"> 1578 </span>
+        </div>
+        <div class="picts">
+            <img style='max-height:100px;max-width:100%' alt=""
+                onclick="InventoryInst().img_click(event)">
+        </div>
+        <div class="info">
+            <div class='product_name wordwrap' style="max-width:99%;">
+                Product Name
+            </div>
+            <div class='product_status'>
+                <span data-ci='offer_placed_Ends_on' style="font-family:Arial"></span>
+                    &nbsp;
+                <span style="font-family:Georgia">
+                    Mon, 10:38
+                </span>
+                <span data-ci="not_activated"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="component_holder" data-src="/cdx/common/default__top.html"></div>
+<br>
+<br>
+<br>
+<div id="inventory__win" style="text-align:center;background:var(--reg_prod_win_bgc);width:100%;display:block;margin:auto">
+<div style="max-width:900px;margin:auto;background:#EEEEEE;min-height:100%">
+<!--div id="inventory__close" class="fancy_buttons fancy_buttons_close" style="float:right;position:sticky;right:0;top:0;text-align:center" 
+    onclick="console.log('closing inventory')">&nbsp;&times;&nbsp;
+</div-->
+<div id="inventory__list">
+    <div id="inventory__message" data-ci="no_product_yet" style="min-height:200px;font-size:30px;color:red;display:none;
+                margin:auto;width:90vw;">
+        No product yet
+    </div>
+    <div id="inventory__table" style="width:100%;margin:auto;margin-top:5px;border-collapse:collapse">
+    </div>
+</div>
+</div>
+</div>
+
+

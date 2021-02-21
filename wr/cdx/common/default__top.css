@@ -1,0 +1,231 @@
+/*ecksdux*/
+/*
+:root{
+    --home-menu-buttons-color:rgb(77,77,230);
+}
+*/
+/* BAR WIDGET */
+
+#top__bar_widget_holder{
+    /*background-image:linear-gradient(black, rgba(255,255,80,0.5));*/
+    background:gray;
+}
+
+#search_bar_holder{
+    width:90%;
+    text-align:center;
+}
+
+
+#menu_buttons{
+    display:inline-flex;
+}
+
+#__bar_widget__inner{
+
+}
+
+#menu_dropdown button, #menu_buttons{
+    overflow:hidden;
+    -webkit-transition: max-width .2s ease;
+    transition: max-width .2s ease;
+}
+
+@media only screen and (max-width:7in){
+    #__bar_widget__inner{
+        flex-direction:column;
+        align-items:center;
+    }
+    #menu_buttons{
+        /*display:none;*/
+        max-width:0px;
+    }
+    #menu_dropdown button{
+        display:initial;
+    }
+    
+    #search_bar_itself{
+        margin-top:5px !important;
+        width:90%;
+    }
+    #search_bar_holder{
+        text-align:center;
+        width:100%;
+        display:none;
+    }
+    #menu_search_button span:nth-child(2){ display:none; }
+    #menu_search_button span:nth-child(1){ display:inline; }
+}
+
+@media only screen and (min-width:7in){
+    #__bar_widget__inner{
+        flex-direction: row;
+    }
+    #menu_buttons{
+        /*display:inline-flex;*/
+        max-width: 500px;
+    }
+    #menu_dropdown button{
+        display:none;
+    }
+    #search_bar_itself{
+        margin-right: 10px;
+        padding-left: 5px;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    #search_bar_holder{
+        text-align:left;
+        width:50%;
+        display:block;
+    }
+    
+    #menu_search_button span:nth-child(1){ display:none; }
+    #menu_search_button span:nth-child(2){ display:inline; }
+}
+
+#search_bar_itself{
+    padding-right: 5px;
+    width: 90%;
+    max-width: 500px;
+}
+
+
+@media screen only and (max-device-aspect-ratio: 1/1), (max-aspect-ratio: 1/1){
+    #__bar_widget__inner{
+
+    }
+}
+
+#__bar_widget__ button {
+    border: 1px solid blue; /*IE*/
+    border: 1px solid var(--home-menu-buttons-color);
+    background: rgba(0,0,0,0);
+    white-space: nowrap;
+    font-size: 15px;
+    padding: 5px;
+    margin: 0 0 0 3px;
+    color: blue; /*IE*/
+    color: var(--home-menu-buttons-color);
+    cursor: pointer;
+    height: 40px;
+}
+
+#__bar_widget__ button:hover{
+    color:white;
+    border: 1px solid white;
+    background: rgba(255, 255,40,0.2);
+    box-shadow: 0 0 2px 1px rgba(255,255,40,1);
+}
+
+#__bar_widget__ button label{
+    cursor: pointer;
+}
+
+.clicked{
+    color: darkcyan;
+    border-color: darkcyan;
+}
+
+
+#top__bar_widget_holder{
+    transition: top .8s ease-in-out;
+}
+
+#top__bar_widget_holder{
+    min-height:40px;
+}
+
+#__bar_widget__ .dropdown{
+    margin-top: 3px;
+    background: black;
+    z-index: 99999;
+    position: relative;
+    border-radius: 2px;
+}
+
+#__bar_widget__ .dropdown button{
+    font-size: 15px;
+    font-family: arial;
+    border: none;
+    /*padding: 1px 1px 1px 10px;*/
+    margin: 0px;
+    width: 100%;
+    cursor: pointer;
+    text-align: left;
+    color: white;
+    align-items:center;
+}
+
+#__bar_widget__ .dropdown button:hover{
+    background:#FFDD88;
+    color:darkblue;
+}
+
+/*
+#__bar_widget__ .search_button{
+    font-size: 10px;
+    padding: 0px;
+    margin: 0px;
+    margin-left: 20px;
+    text-align: center;
+}*/
+
+#__search_button__{
+    border-radius: 100px;
+    margin-right: 5px;
+    -ms-transform: rotate(-70deg); /* IE 9 */
+    -webkit-transform: rotate(-70deg); /* Chrome, Safari, Opera */
+    transform: rotate(-70deg);
+}
+/*
+#__bar_widget__ .search_button .clicked{
+    color: darkcyan;
+}
+
+#__bar_widget__ .search_button:focus, #__search_button__:focus{
+    outline:none;
+}
+
+#__bar_widget__ .search_button:hover{
+    font-weight: bold;
+}*/
+
+
+#__bar_widget__ #search_bar_itself input{
+    border: none;
+    border-radius: 10px 0 0 10px;
+    font-size: 16px;
+    padding: 8px;
+    /* min-height:40px; */
+    background: white;
+    color: darkblue;
+    width: 100%;
+    outline: none;
+}
+
+#__bar_widget__ #search_bar_itself button{
+    border: 1px solid white;
+    border-radius: 0 10px 10px 0;
+    padding: 6px;
+    width: 75px;
+    margin-left: 0;
+    outline: none;
+}
+
+#__bar_widget__ #search_bar_itself button:hover{
+    box-shadow: none;
+}
+
+
+#bar_widget_logo>div{
+    padding: 5px 15px 1px 15px;
+    min-height: 100%;
+    margin-right: 5px;
+    font-size: 20px;
+    background: blue;
+    color: white;
+    font-family: arial;
+    text-align: center;
+}

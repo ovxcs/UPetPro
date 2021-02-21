@@ -1,0 +1,8 @@
+
+h:\new\M\ED\cdx>h:\new\R\bin\../opt/php/php.exe ./aucts/products.php 
+
+H:\new\M\ED\cdx\utils\utils.php IS NOT MAIN
+Fatal error: Uncaught Error: Call to undefined function this_is_main() in H:\new\M\ED\cdx\aucts\products.php:208
+Stack trace:
+#0 {main}
+  thrown in H:\new\M\ED\cdx\aucts\products.php on line 208

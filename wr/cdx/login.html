@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/res/_/tools1/fi/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/res/_/tools1/fi/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/res/_/tools1/fi/favicon-16x16.png">
+<link rel="manifest" href="/res/_/tools1/fi/site.webmanifest">
+<link rel="mask-icon" href="/res/_/tools1/fi/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" type="text/css" href="site.css">
+
+<script src="/3fe/es6-promise/es6-promise.auto.min.js"></script>
+<script src="/3fe/fetch/fetch.js"></script>
+
+<script src="/cdx/utils/time.js"></script>
+<script src="/cdx/utils/utils.js"></script>
+<script src="/cdx/auth/components2.js"></script>
+<script src="/cdx/auth/sha1.js"></script>
+<script src="/cdx/lang/lang.js"></script>
+
+<style>
+
+#auth_widget{
+    margin:10px;
+    width:150px;
+    text-align:center;
+    position:relative;
+    background:rgba(255,255,255,0.6);
+    border-radius: 5px;
+}
+
+#auth_widget div{
+    font-size:14px;
+    font-family:Arial;
+    color:Brown;
+
+    display:inline;
+    text-align:center;
+}
+
+/*
+#auth_widget:hover div{
+    background:#DDDDDD;
+}
+*/
+
+/*
+#loginbtn{
+    width:90px;
+    padding-bottom:5px;
+    padding-left:10px;
+    position:absolute;
+    text-align:left;
+    border-bottom-left-radius:5px;
+    border-top-left-radius:37px;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:37px;
+}
+#signupbtn{
+    width:60px;
+    z-index:10;
+    position:absolute;
+    margin-left:40px;
+    padding-top:5px;
+    text-align:center;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:37px;
+    border-bottom-left-radius:37px;
+    border-top-left-radius:2px;
+    background:rgba(255,255,255,0.6);
+}
+*/
+
+#auth_widget div:hover{
+    /*color:DarkBlue;*/
+    cursor:pointer;
+    /*transition: background .1s, font-weight 10s;*/
+    text-shadow: 0 0 1px; #FFEE99;
+    /*font-weight:bold;*/
+    transition: text-shadow 1s;
+}
+
+#languages_button{
+    z-index:99999;
+    position:absolute;
+    left:0; top:0;
+    color:#444444;
+    padding: 5px;
+    font-family:Arial;
+    font-size:10px;
+    text-align:center;
+}
+
+#languages_button:hover, #languages_button label:hover{
+    cursor:pointer;
+    text-shadow: 0 0 1px; #FFEE99;
+}
+
+#languages_button:hover label:nth-of-type(2){
+    text-decoration:overline;
+}
+
+</style>
+</head>
+
+<div class="component_holder" data-src="/cdx/lang/lang_table.html"></div>
+
+<body style="margin:0;">
+
+<div id="languages_button" 
+    onclick="languages_selector_win__show(true)">
+    <label>language</label> <br>
+    <label style="width:100%;">&nbsp;&nbsp;ñ是कЖΣش&nbsp;&nbsp;</label>
+</div>
+
+<div class="component_holder" data-src="/cdx/auth/components2.html"></div>
+
+<div id="auth_widget" style="float:right;font-size:20px;"> 
+    <div id="loginbtn" style="" onclick="auth__show_win(true, 'auth_opt_logIn')">LOG IN</div>
+    <span style="font-size:14px">&nbsp;/&nbsp;</span>
+    <div id="signupbtn" style="" onclick="auth__show_win(true, 'auth_opt_signUp')">SIGN UP</div> 
+    <!--<div id="loginbtn" style=""><br>Login</div>
+    <div id="signupbtn" style="">Sign up<br>&nbsp;</div> -->
+</div>
+
+<div id="home_top">
+    &nbsp;
+    <div class="logo">
+        <div> <span style="font-size:18px;color:brown">the </span>site </div>
+    </div>
+    &nbsp;
+</div>
+
+<!--div style="background:green;color:white;padding-left:10px">
+<button onclick="local_dt_from_serv_ts(Date.now()/1000 + 3772, 'ro')
+        .then(function(a){console.log('**',a,'**')})
+        .catch(function(e){console.log(e)})"> Server TS</button>
+<button onclick="test_async()"> Test async </button>
+<button onclick="test_elements()"> Test elements </button>
+</div-->
+</body>
+
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,231 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<script src='/cdx/lang/lang.js'></script>
+<script src='/cdx/utils/utils.js'></script>
+<script src='/cdx/utils/time.js'></script>
+<script src='/cdx/uploader/uploader3.js'></script>
+
+<meta class="dictionaries" content="lang">
+
+<script src="product_registration.js"></script>
+
+<link rel="stylesheet" type="text/css" href="product_registration.css">
+
+<style>
+.lbl_inp_sel{
+    max-width:150px;
+}
+</style>
+
+<!--<div style="display:block;z-index:1000;position:absolute;left:0;top:0;height:100%;width:100%;
+            background:rgba(0,0,0,0.8);background:red" id='uploader_frame;'>
+</div>-->
+
+<div class="component_holder" data-src="/cdx/uploader/myUploader3.html" style="display:none" id="uploader_holder"></div>
+<div class="component_holder" data-src="/cdx/common/default__top.html"></div>
+<br><br><br>
+<div id="register_product__forms"
+        style="margin:10px auto 10px auto;">
+    <a href="#reviewsz" style="float:right;font-family:georgia;padding-right:5px"> reviews </a>
+    <div style="min-width:360px;width:100%;
+            background:var(--reg_prod_bgc);border-top-left-radius:0px;"
+            data-form_action="inner,test.php">
+    <form onSubmit="return false;">
+        <br><br>
+        <div id="register_product__fields" style="width:98%;margin:auto;">
+            <div style="display:flex;width:100%;margin:auto">
+                <div style="flex:40">
+                    <label data-ci='product_name'>Product name</label><br>
+                    <input id='product_name' data-ci='name_model' placeholder='name, model/vers.'>
+                </div>
+                <div style="flex:1;margin-left:5px;min-width:60px">
+                    <label data-ci='year' >Year</label><br>
+                    <input type="number" id='product_year' data-ci='yyyy' style="width:100%;text-align:center;font-family:Georgia" 
+                            placeholder='yyyy'>
+                </div>
+            </div><br>
+            <div>
+                <label data-ci='location'>Location</label><br>
+                <input id='product_location' data-ci='city_country' placeholder='city, country'>
+            </div><br>
+            <div style="text-align:center;width:100%;margin:auto">
+                <div id="product_def_pic"
+                        onclick='ProductRegistrationInst().show_uploader()'>
+                    <img src="" alt="no image" style="display:none;max-height:200px">
+                    <div data-ci='no_picture'>No picture!</div>
+                </div>
+            </div><br>
+            <div style="width:100%;">
+                <div style="display:flex;width:100%;justify-content:space-between;">
+                        <label data-ci='description'>Description</label>&nbsp;&nbsp;
+                        <select id="product_lang_select"
+                                    style="padding:2px;border-radius:5px;line-height:1.2em;">
+                            <option disabled selected value="--">&nbsp;&nbsp; -- &#x1F310; --</option>
+                            <option value='de'>&nbsp;deutsch</option>
+                            <option value='en'>&nbsp;english</option>
+                            <option value='es'>&nbsp;espaniol</option>
+                            <option value='fr'>&nbsp;francais</option>
+                            <option value='hu'>&nbsp;magyar</option>
+                            <option value='pt'>&nbsp;portuguese</option>
+                            <option value='ro'>&nbsp;română</option>
+                            <option value='ru'>&nbsp;русский</option>
+                        </select>
+                    <!--span id="product_add_lang" style="cursor:pointer">&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;</span-->
+                </div>
+                <textarea id='product_description' placeholder=' ... ' rows="5"></textarea>
+            </div>
+        </div><br>
+        <!--<button id='photos_uploader_button' class="fancy_buttons"
+                    onclick='document.getElementById("uploader_frame").style.display="block";'>
+                    &#x1F4F7;&nbsp;<span>Upload pictures</span>
+        </button>-->
+        <div id='place_offer__forms' style="width:98%;margin:auto;">
+            <div id="table_prices" style="display:flex;
+                        justify-content:space-around;
+                        font-size:20px;width:100%;margin:auto;
+                        padding-top:5px;padding-bottom:5px;">
+                <div class="lbl_inp_sel" style="flex:4;">
+                    <label>
+                        <span data-ci="starting_price">
+                            Starting&nbsp;price
+                        </span>
+                    </label>
+                    <br>
+                    <div  style="margin-top:5px">
+                    <input type="number" id="product_price_s" style="width:100px;text-align:right" placeholder='0.0'>
+                    <select id="product_valut">
+                        <option value='EUR'>EUR</option>
+                        <option value='RON'>RON</option>
+                        <option value='HUF'>HUF</option>
+                        <option value='USD'>USD</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="lbl_inp_sel" style="flex:3;">
+                    <label style="margin-bottom:20px"> 
+                        <span data-ci="ends_within">
+                            Ends within
+                        </span>
+                        <span style="display:inline;font-size:12px;text-align:center;">
+                            (min. 1h) 
+                        </span>
+                    </label>
+                    <br>
+                    <div style="margin-top:5px">
+                    <input type="number" id="product_auct_ends" style="width:50px;" placeholder='>1h'>
+                    <select id="product_auct_ends_unit">
+                        <option value='h' data-ci="hours">hours</option>
+                        <option value='d' data-ci="days">days</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="lbl_inp_sel" style="flex:1;max-width:70px">
+                    <label style="float:left;">
+                        Active
+                    </label>
+                    <br>
+                    <div style="border:none;position:relative;font-size:25px">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="checkbox" id="product_activated"
+                            style="cursor:pointer;
+                                    position:absolute;opacity:0;z-index:10;width:31px;height:31px;left:0px;top:-3px">
+                        <span class="checkmark"
+                            style="border:1px solid black;text-align:center;font-size:22px;font-weight:bold;
+                                    cursor:pointer;
+                                    position:absolute;width:29px;height:29px;left:0px;top:0px">
+                            &#x2713;
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div id="register_product__info" style="width:100%;text-align:center;
+                background:black;color:green;font-size:22px;margin-bottom:20px">
+            </div>
+            <div id="register_product__errors" style="text-align:center;width:100%;font-family:monospace;
+                background:black;color:red;font-size:22px;margin-bottom:20px">
+            </div>
+            <div id="product_submit_buttons" style="width:100%;display:flex;padding-bottom:10px;">
+                <span id='product_id' style="flex:2;padding-left:20px;color:rgb(160,160,160)">#
+                </span>
+                <div style="flex:1;text-align:right;padding-right:20px;display:flex;">
+                    &nbsp;&nbsp;
+                    <button data-ci="register_product__new" class="fancy_buttons"
+                        onclick="ProductRegistrationInst().clear()">
+                        &nbsp;New&nbsp;
+                    </button>
+                    &nbsp;&nbsp;
+                    <button data-ci="place_product" class="fancy_buttons" style="display:none"
+                        onclick="ProductRegistrationInst().register_product_and_update_if(this, true)">
+                        &nbsp;Edit&nbsp;
+                    </button>
+                    &nbsp;&nbsp;
+                    <button data-ci="register_product__save" class="fancy_buttons"
+                        onclick="ProductRegistrationInst().register_product_and_update_if(this)">
+                        &nbsp;Register&nbsp;
+                    </button>
+                    &nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+            <div id="offer_placed" style="background:gray;color:white;font-family:Arial;text-align:center;
+                font-size:20px;display:none;padding:5px;margin-bottom:10px;">
+                <span data-ci='offer_placed_Ends_on'>Offer placed! Ends on
+                </span>&nbsp;<span id="offer_placed_ends" style='font-family:georgia'></span>
+            </div>
+        </div> <!-- END of place_offer__forms -->
+        <div>
+                <!--label id="product_translations_label" data-ci="product_translations">
+                    Other languages translations
+                </label-->
+                <button id="product_add_lang"
+                                        style="margin:7px"
+                                        class="fancy_buttons" data-ci="add_translation"
+                            onclick="product_registration__add_translation_box()">
+                            Insert translation 
+                </button>
+        </div>
+        <div id="product_other_languages">
+            <div class="product_other_langs_box" style="display:none">
+                <div style="width:100%;display:flex;">
+                    <input class="product_other_langs_name" data-ci="name_only_if_diff"
+                            placeholder='name - only if translation differs'>
+                    <select>
+                        <option disabled selected value="--" data-ci="select_language">-- language --</option>
+                        <!--option value='de'>deutsch</option>
+                        <option value='en'>english</option>
+                        <option value='es'>espaniol</option>
+                        <option value='fr'>francais</option>
+                        <option value='hu'>magyar</option>
+                        <option value='pt'>portuguese</option>
+                        <option value='ro'>română</option>
+                        <option value='ru'>русский</option-->
+                    </select>
+                    <!--span class="product_remove_lang">&nbsp;&nbsp;&nbsp;&#x2212;&nbsp;&nbsp;&nbsp;</span-->
+                </div>
+                <textarea placeholder=' ... ' rows="5"></textarea>
+            </div>
+        </div>
+    </form>
+    </div>
+    <button onclick="ProductRegistrationInst().disable_all(true)"> test disable all </button>
+<button onclick="ProductRegistrationInst().disable_all(false)"> test enable all </button>
+</div>
+
+<div id="reviewsz" class="component_holder" data-src="/cdx/aucts/reviews.html"></div>
+
+<script>
+window.addEventListener("load", function(){
+    var els = document.querySelectorAll(".product_other_langs_box");
+    if (els.length) els[0].getElementsByTagName("select")[0].innerHTML = 
+            document.getElementById("product_lang_select").innerHTML;
+    ProductRegistrationInst().try_load_id_from_location();
+});
+</script>
+
+
+
+
+
+
+
+
+

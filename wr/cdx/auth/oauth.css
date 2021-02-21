@@ -1,0 +1,129 @@
+<style>
+
+/*     OAUTH     */
+:root{
+    /* CUSTOMIZE */
+    --oauth-icons-direction:row;
+}
+#oauth_icons{
+    display:flex;
+    flex-direction:var(--oauth-icons-direction);
+    margin-bottom:20px;
+    padding:0px;
+}
+
+#oauth_icons button{
+    display: inline-flex;
+    align-items: center;
+    /* CUSTOMIZE */
+    /*
+        max-width: 300px;
+        min-width: 300px;
+        padding: 2px;
+    */
+    margin-top: 3px;
+    border-radius: 5px;
+    
+    cursor:pointer;
+    transition: filter width 2s;
+    -webkit-filter: grayscale(0%); /* Ch 23+, Saf 6.0+, BB 10.0+ */
+    filter: grayscale(0%); /* FF 35+ */
+}
+
+#oauth_icons button div{
+    /* CUSTOMIZE */
+    display:none;
+}
+
+#oauth_icons button:hover{
+    opacity: 1;
+    -webkit-filter: grayscale(20%); /* Ch 23+, Saf 6.0+, BB 10.0+ */
+    filter: grayscale(20%); /* FF 35+ */
+    -webkit-transition: filter width 2s; /* Safari prior 6.1 */
+    transition: filter width 2s;
+}
+
+
+#oauth_icons{
+    /*height:50px;*/
+}
+#oauth_icons button div{
+    font-size:30px;
+    font-weight:900;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+#oauth div{
+    flex:1;
+}
+
+#oauth div button{
+    background:rgba(255, 0, 255, 0);
+    border:none;
+}
+/* CUSTOMIZE */
+
+/*
+#oauth #oauth_icons #facebook { 
+    background:#3b5998; color:white; }
+#oauth #oauth_icons #google { 
+    background:#4c8bf5; color:white; border:1px solid #4c8bf5; }
+#oauth #oauth_icons #twitter { 
+    background:#1b9ff1; color:white; }
+#oauth #oauth_icons #amazon { 
+    background:rgba(255,167,0,1); }
+#oauth #oauth_icons #linkedin { 
+    background:rgba(0,114,177,1); color:white; }
+*/
+
+/*     END OAUTH     */
+
+
+
+/* DIRECTION */
+
+/*vertical*/
+#auth_v_sep{
+    display:none;
+}
+#auth_h_sep{
+    display:block;
+}
+#auth_win_inner{
+    max-width:400px;
+}
+
+/*horiz.*/
+/*
+#auth_v_sep{
+    display:none;
+    border-right:2px solid black;
+}
+#auth_h_sep{
+    display:none;
+}
+#auth_win_inner{
+    max-width:500px;
+}
+*/
+/* DIRECTION END*/
+
+#auth_errors{
+    font-family:Arial;
+    font-weight:Normal;
+    font-size:16px;
+    color:#FF3300;
+    text-align:center;
+    margin-top:10px;
+    -webkit-font-smoothing:antialiased;
+}
+
+
+.spans input::placeholder{
+    font-size:14px;
+}
+.spans input::-webkit-input-placeholder{
+    font-size:14px;
+}
+</style>

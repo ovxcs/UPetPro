@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script src="../../utils/utils.js"></script>
+<script src="../../lang/lang.js"></script>
+<script src="../../common/common.js"></script>
+
+<meta class="dictionaries" content="lang2">
+
+</head>
+
+<body>
+<DIV>
+PAGE CONTENT
+</DIV>
+
+<DIV id="comp2_holder">
+</DIV>
+
+<script>
+
+function test_module_loading(){
+    console.log("module loading test ...");
+    load_component_page_and_translate("/cdx/test/test2/component_test.html", "comp2_holder", 0, function(){});
+}
+
+window.addEventListener('load', test_module_loading);
+
+</script>
+
+
+</body>
+</html>

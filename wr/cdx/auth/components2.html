@@ -1,0 +1,231 @@
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<style>
+#auth_win{
+    display:none;
+}
+</style>
+<!--link rel="stylesheet" type="text/css" href="/cdx/auth/thm_black.css"-->
+<link rel="stylesheet" type="text/css" href="/cdx/auth/thm_white.css">
+<link rel="stylesheet" type="text/css" href="/cdx/auth/oauth.css">
+
+<script src="/cdx/lang/lang.js"></script>
+<script src="/cdx/auth/components2.js"></script>
+<script src="/cdx/utils/utils.js"></script>
+<script src="/cdx/auth/sha1.js"></script>
+
+<meta class="dictionaries" content="lang">
+<meta class="dictionaries" content="../lang/lang">
+
+<div id="auth_win" style="position:fixed;left:0;top:0;bottom:0;right:0;
+        width:99.99%;z-index:9999;overflow-y:auto;margin:auto;">
+    <div style="position:relative;">
+    <div id="auth_dialog_box" style="margin:8% auto;">
+        <div style="display:flex">
+            <div style="flex:1">
+                <button id="auth_win_close_btn" onclick="auth__show_win(false)"
+                    style="font-size:30px;font-family:monospace;font-weight:light;cursor:pointer;">
+                    &times;
+                </button>
+            </div>
+            <div id="auth_win_title" style="font-family:Arial;flex:7;text-align:right;display:inline">
+                <div style="display:inline-block;font-family:Arial;padding:5px"></div>
+            </div>
+            <div style="flex:1;text-align:right;">
+                <button id="auth_win_toggle" onclick="auth__display_mode('t');"
+                    style="background:rgba(0,0,0,0);border:none;color:#888888;
+                    font-size:4px;font-weight:lighter;cursor:pointer;">V
+                </button>
+                <button id="clear ls" onclick="localStorage.clear();"
+                    style="background:rgba(0,0,0,0);border:none;color:#888888;
+                    font-size:4px;font-weight:lighter;cursor:pointer;">cls
+                </button>
+            </div>
+        </div>
+        <br>
+        <!-- <button onclick="clear_ls()"> Clear LS</button> -->
+        <div id="auth_info" style="display:none;">
+                Info messages from server
+        </div>
+        <!-- display 'block' instead of flexDirection:column for IE compatibilty -->
+        <div id="auth_components" style="display:block;margin:auto;min-width:400px;">
+            <div data-ci="login_with" id="oauth__title">LOGIN WITH</div>
+            <div style=""> <!-- 3th flex child: oauth-->
+                <div id="oauth" style="color:white;font-size:20px;text-align:center;margin:auto;">
+                    <div id="oauth_icons">
+<div>
+                        <button id="facebook"
+                            onclick="auth__login_with('facebook')">
+                        <img height="48" width="" style="cursor:pointer" src="../../res/_/facebook.jpg">
+                        <div>facebook</div>
+                        </button>
+</div>
+<div>
+                        <button id="google"
+                            onclick="auth__login_with('google')">
+                        <img height="48" width="" style="cursor:pointer" src="../../res/_/google.jpg">
+                        <div>Google</div>
+                        </button>
+</div>
+<div>
+                        <button id="twitter"
+                            onclick="auth__login_with('twitter')">
+                        <img height="48" width="" style="cursor:pointer" src="../../res/_/twitter.jpg">
+                        <div>Twitter</div>
+                        </button>
+</div>
+<div>
+                        <button id="amazon"
+                            onclick="auth__login_with('amazon')">
+                        <!--img height="48" style="cursor:pointer" src="../../res/_/amazon.jpg"-->
+                        <img height="48" width="" style="cursor:pointer" src="../../res/_/amazon_gold.png">
+                        <div>Amazon</div>
+                        </button>
+</div>
+<div>
+                        <button id="linkedin"
+                            onclick="auth__login_with('linkedin')">
+                        <img height="48" width="" style="cursor:pointer" src="../../res/_/linkedin.jpg">
+                        <div>LinkedIn</div>
+                        </button>
+</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="auth_h_sep" style="flex:1;"><hr></div> <!-- second flex child  begin and end-->
+            <div id="auth_v_sep" style="flex:1;">&nbsp;</div>
+            
+            <div id='auth__onsite' style="flex:15;text-align:center;">
+                <div data-ci="this_site_account" id="auth__onsite_title">SITE ACCOUNT</div>
+                <div id='auth__onsite_inner' style="width:98%;margin:auto;">
+                    <div id="su_table" style="display:none;">
+                        <div class="box_title"></div>
+                            <div class="spans">
+                                <div class='animated_span'>
+                                    <label data-ci="name">Name</label>
+                                    <input data-ci="user_name" type="text" name="su_nm" id="su_nm" placeholder="as you will be known by others"
+                                        autocomplete="off">
+                                </div>
+                                <div class='animated_span'>
+                                    <label data-ci="existing_email">Email</label>
+                                    <input data-ci="valid_mail" type="text" name="su_ml" id="su_ml" placeholder="valid email address"
+                                        autocomplete="off" autocapitalize="off">
+                                </div>
+                                <div class='animated_span'>
+                                    <label data-ci="chose_a_password">Password</label>
+                                    <input data-ci="at_least_6_chars" type="password" name="su_pw" id="su_pw" placeholder="at least 6 characters"
+                                        autocomplete="off">
+                                </div>
+                                <div class='animated_span'>
+                                    <label data-ci="retype_password">Confirm</label>
+                                    <input data-ci="retype_above_password" type="password" name="su_cf" id="su_cf" placeholder="retype the above password"
+                                        autocomplete="off">
+                                </div>
+                            </div>
+                        <div style="text-align:right">
+                            <button onclick="auth__sign_up(this)"> Sign up </button>
+                        </div>
+                    </div>
+
+                    <div id="li_table" style="display:block">
+                        <div class="spans">
+                            <div class='animated_span'>
+                                <label for="email">Email</label>
+                                <input type="text" autocapitalize="off" name="email" id="li_email" placeholder="">
+                            </div>
+                            <div class='animated_span'>
+                                <label for="password" data-ci="password">Password</label>
+                                <input type="password" name="li_password" id="li_password" placeholder="">
+                            </div>
+                        </div>
+                        <div style="text-align:right">
+                            <button onclick="auth__login(this)"> Login </button>
+                        </div>
+                    </div>
+
+                    <div id="ipwr_table" style="display:none;">
+                        <div data-ci="password_recovery" class="box_title">Password recovery</div>
+                        <div class="spans">
+                            <div class='animated_span'>
+                                <label>Email</label>
+                                <input type="text" autocapitalize="off" name="email" id="ipwr_email" >
+                            </div>
+                        </div>
+                        <div style="text-align:right">
+                            <button data-ci="send_recovery_mail" onclick="auth__pw_recovery_init(this)">Send recovery email</button>
+                        </div>
+                    </div>
+
+                    <div id="reset_code_table" style="display:none;">
+                        <div class="spans">
+                            <div class='animated_span'>
+                                <label>Email</label>
+                                <input type="text" name="email" id="pwr_email">
+                            </div>
+                            <div class='animated_span'>
+                                <label>Recovery code</label>
+                                <input type="text" name="pwr_code" id="pwr_code">
+                            </div>
+                            <div class='animated_span'>
+                                <label data-ci="chose_a_password">Password</label>
+                                <input type="password" name="pwr_password" id="pwr_password1">
+                            </div>
+                            <div class='animated_span'>
+                                <label data-ci="retype_password">Confirm</label>
+                                <input type="password" name="pwr_confirm" id="pwr_password2">
+                            </div>
+                        </div> 
+                        <div style="text-align:right">
+                            <button onclick="auth__pw_reset_new_pw(this)"> Reset </button>
+                        </div>
+                    </div>
+                    <div id="auth_errors" style="padding-bottom:5px;"></div>
+                    <br>
+                    <div style="width:100%;display:flex;margin-bottom:8px;" id="auth_menu">
+                        <div id="auth_opt_logIn" style="display:none;flex:1" onclick="auth__show_inputs(this)">
+                            <label>
+                                    <span data-ci="already_have_account" class="auth_opt_question">Already have an account? </span><br>
+                                    <span style="font-weight:bold">Login</span></label>
+                        </div>
+                        <div id="auth_opt_signUp" style="flex:1" onclick="auth__show_inputs(this)">
+                            <label>
+                                    <span data-ci="do_not_have_account" class="auth_opt_question">Do not have an account? </span><br>
+                                    <span data-ci="sign_up" style="font-weight:bold">Sign up</span></label>
+                        </div>
+                        <div id="auth_opt_recoveryPwInit" style="flex:1;display:inline" onclick="auth__show_inputs(this)">
+                            <label>
+                                    <span data-ci="recover" style="font-weight:bold">Recover</span><br>
+                                    <span data-ci="forgoten_password" class="auth_opt_question">forgoten password</span></label>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end forms comp -->
+
+        </div> <!-- end flex -->
+    </div> <!-- end inner -->
+    </div>
+    <form id="auth__submitter" method="post" action="auth/auth.php">
+        <input type="hidden">
+        <input type="hidden">
+        <input type="hidden">
+        <input type="hidden">
+        <input type="hidden">
+        <input type="hidden">
+    </form>
+    <!--<img src onerror='auth_enable()'> -->
+</div>
+
+<script>
+function display_auth_win(){
+    document.getElementById("auth_win").style.display = "block";
+}
+if (window.addEventListener){
+    window.addEventListener('load', display_auth_win);
+}else{
+    window.attachEvent('onload', display_auth_win);
+}
+</script>

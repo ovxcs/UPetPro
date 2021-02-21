@@ -1,0 +1,727 @@
+<style>
+.reviews{
+    width:80%;
+    font-family:Arial;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    margin: 0 auto 10px auto;
+    justify-content:center;
+    self-align:center;
+    border-top: 1px solid gray;
+    background:#444444;
+}
+
+@media only screen and (max-width: 750px) {
+    .reviews{
+        width:100%;
+    }
+}
+
+.reviews .reviewContainer{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:15px;
+    background:var(--reviews__container_bgc);
+    border-radius:5px;
+}
+
+.reviews .reviewContainer:nth-of-type(2n){
+    background:var(--reviews__2n_bgc);
+    border-top:var(--reviews__2n_bgc_border_top);
+    border-right:var(--reviews__2n_bgc_border_right);
+}
+.reviews .reviewContainer:nth-of-type(2n+1){
+    background:var(--reviews__2n1_bgc);
+    border-top:var(--reviews__2n1_bgc_border_top);
+    border-right:var(--reviews__2n1_bgc_border_right);
+}
+
+.reviews .head_main{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#666666;
+    color:white;
+    margin-bottom:10px;
+}
+
+.reviews .head_main .reviews_overall{
+    font-family:georgia;
+    font-size:25px;
+    font-weight:bold;
+    padding:10px 15px 10px 15px;
+    color:white;
+}
+
+.reviews .head_main button{
+    padding:10px;
+}
+
+.reviews .head{
+    display:flex;
+    padding:10px 10px 10px 10px;
+}
+
+.reviews .head span{
+    flex:1;
+    text-align:center;
+}
+
+.reviews .head .user_name{
+    flex:2;
+    text-align:left;
+}
+
+.reviews .head .appreciation{
+    text-align:right;
+}
+.reviews .content textarea{
+    max-width:100%;
+    min-width:100%;
+    border:none;
+    min-height:50px;
+    padding:10px;
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.reviews .review,
+.reviews .comment{
+    margin:5px;
+    border:1px solid gray;
+    /*background:#CCCCCC;*/
+    background:var(--reviews__inps_bgc);
+    border-radius:15px 15px 0 15px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+}
+
+.reviews .comment{
+    box-sizing:border-box;
+    border:none;
+    /*background:#EEEEEE;*/
+}
+
+.reviews .review.hidden,
+.reviews .comment.hidden{
+    display:none;
+}
+
+.reviews .edit{
+    color:gray;
+    cursor:pointer;
+    max-width:25px;
+    max-height:20px;
+    overflow:visible;
+    font-size:25px;
+    padding:0px;
+    margin:0px;
+}
+.reviews .edit:hover{
+    font-weight:bold;
+    color:black;
+}
+
+.reviews .buttons{
+    margin:5px;
+    display:flex;
+    align-items:stretch;
+    justify-content:center;
+}
+
+.reviews .buttons button{
+    margin:5px;
+    /*border-radius:15px;*/
+    text-align:center;
+    padding:5px;
+    cursor:pointer;
+    background:inherit;
+    color:#DDDDDD;
+    border:1px solid #DDDDDD;
+    display:block;
+    height:35px;
+}
+.reviews .new .buttons button{
+    color:#666666;
+    border:1px solid #666666;
+}
+.reviews .buttons button:hover{
+    background:#444444;
+    color:white;
+}
+
+.reviews select.rateSel{
+    margin-right:9px;
+    padding:5px;
+}
+
+.reviews select.rateSel option{
+    font-family:monospace;
+    font-size:20px;
+}
+
+.reviews select{
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    background:inherit;
+    border:none;
+    cursor:pointer;
+}
+
+.reviews .toggler span:nth-child(-n+2){
+    font-size:20px;
+    font-family:monospace;
+    font-weight:bold;
+    padding:0px;
+}
+
+.reviews .toggler.hidden span:nth-child(1){
+    display:inline;
+}
+
+.reviews .toggler.hidden span:nth-child(2){
+    display:none;
+}
+
+.reviews .toggler span:nth-child(1){
+    display:none;
+}
+
+.reviews .toggler span:nth-child(2){
+    display:inline;
+}
+
+.reviewContainer.model{
+    display:none;
+} 
+
+.reviews .comments.hidden .comment{
+    max-height:0;
+    margin:0px 5px 0px 5px;
+}
+
+.reviews .comments .comment{
+    overflow:hidden;
+    max-height:300px;
+    transition: margin 0.9s ease-out, max-height 0.3s ease-in;
+}
+
+.reviews .reviewContainer.hidden{
+    display:none;
+}
+
+.reviews .reviewContainer .review .buttons.hidden,
+.reviews .reviewContainer .comments .comment .buttons.hidden{
+    display:none;
+}
+
+.reviews .readonly textarea{
+    /*resize:none;
+    background:#FFFFF8;
+    */
+    display:none;
+}
+.reviews .editable .viewarea{
+    display:none;
+}
+
+.reviews .readonly .content .likes{
+    padding:5px 20px 5px 20px;
+    display:none;
+}
+
+.reviews .date{
+    font-family:georgia;
+}
+
+</style>
+
+<div class="reviews">
+    <div class="head_main">
+        <div class="buttons">
+            <button class="add_review" onclick="RevAndComsInst().add_review()">
+                add review
+            </button>
+            <button class="toggler show_reviews hidden"
+                    onclick="RevAndComsInst().toggle_reviews(event)">
+                <span>
+                    &#xfe40;
+                </span>
+                <span>
+                    &#xfe3F;
+                </span>
+                <span class="reviews_count">
+                    0
+                </span>
+                <span data-ci="reviews_qty">
+                    reviews
+                </span>
+            </button>
+        </div>
+        <div style="margin-right:10px">
+            <span class="reviews_overall"> - </span><span class="reviews_overall_max">/5</span>
+        </div>
+    </div>
+    <div class="myNewReview review hidden new">
+        <div class="head">
+            <span class="user_name">
+                Ov Awdxz
+            </span>
+            <span class="appreciation" style="padding-right:20px">
+                -
+            </span>
+            <select class="rateSel">
+                <option value="0" selected disabled data-ci="rate">please rate</option>
+                <option value="1" >&#x25c6; &#x25C7; &#x25C7; &#x25C7; &#x25C7;</option>
+                <option value="2" >&#x25c6; &#x25c6; &#x25C7; &#x25C7; &#x25C7;</option>
+                <option value="3" >&#x25c6; &#x25c6; &#x25c6; &#x25C7; &#x25C7;</option>
+                <option value="4" >&#x25c6; &#x25c6; &#x25c6; &#x25c6; &#x25C7;</option>
+                <option value="5" >&#x25c6; &#x25c6; &#x25c6; &#x25c6; &#x25c6;</option>
+            </select>
+        </div>
+        <div class="content">
+            <textarea placeholder="..."></textarea>
+        </div>
+        <div class="buttons">
+            <button class="save_review" data-ci="save_review"
+                onclick="RevAndComsInst().save_review(event)">
+                save review
+            </button>
+            <button class="discard_review" data-ci="discard_review"
+                onclick="RevAndComsInst().discard(event)">
+                discard
+            </button>
+        </div>
+    </div>
+    <div class="reviewContainer hidden model">
+        <div class="review readonly">
+            <div class="head">
+                <span class="user_name">
+                    Ov Awdxz
+                </span>
+                <span class="date">
+                    3 months ago
+                </span>
+                <span class="edit" onclick="RevAndComsInst().toggle_editable(event, this)">
+                        &#x1F589;
+                </span>
+                <span class="appreciation">
+                   
+                </span>
+            </div>
+            <div class="content">
+                <textarea readonly placeholder="...">Bla bla bla ...</textarea>
+                <div class="viewarea"></div>
+                <div class="likes">
+                    ---
+                </div>
+            </div>
+            <div class="buttons hidden">
+                <button class="save_comment" data-ci="save_modifications"
+                    onclick="RevAndComsInst().save_review(event)">
+                    save modif
+                </button>
+                <button class="discard_comment" data-ci="discard_comment"
+                    onclick="RevAndComsInst().discard(event)">
+                    discard
+                </button>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="add_comment" data-ci="add_comment" onclick="RevAndComsInst().add_comment(event)">
+                add comment
+            </button>
+            <button class="toggler hidden show_comments"
+                    onclick="RevAndComsInst().toggle_comments(event)">
+                <span>
+                    &#xfe40;
+                </span>
+                <span>
+                    &#xfe3F;
+                </span>
+                <span class="comments_count">
+                    0
+                </span>
+                <span data-ci="comments_qty">
+                    comments
+                </span>
+            </button>
+        </div>
+        <div class="myNewComment comment hidden new" style="margin-left:50px;">
+            <div class="head">
+                <span class="user_name">
+                    Another user
+                </span>
+                <span class="date">
+                    
+                </span>
+                <span class="appreciation">
+                    ---
+                </span>
+            </div>
+            <div class="content">
+                <textarea placehoolder=". . ."></textarea>
+            </div>
+            <div class="buttons">
+                <button class="save_comment" data-ci="save_comment"
+                    onclick="RevAndComsInst().save_comment(event)">
+                    save comment
+                </button>
+                <button class="discard_comment" data-ci="discard_comment"
+                    onclick="RevAndComsInst().discard(event)">
+                    discard
+                </button>
+            </div>
+        </div>
+        <div class="comments hidden" style="margin-left:50px;">
+            <div class="comment readonly">
+                <div class="head">
+                    <span class="user_name">
+                        Another user
+                    </span>
+                    <span class="date">
+                        2 weeks ago
+                    </span>
+                    <span class="edit" onclick="RevAndComsInst().toggle_editable(event, this)">
+                        &#x1F589;
+                    </span>
+                    <span class="appreciation">
+                        -
+                    </span>
+                </div>
+                <div class="content">
+                    <textarea readonly placeholder=". . ."> sdf odcw kwdflk jw kd; Ldck ...</textarea>
+                    <div class="viewarea"></div>
+                    <div class="likes">
+                        ---
+                    </div>
+                </div>
+                <div class="buttons hidden">
+                    <button class="save_comment" data-ci="save_modifications"
+                        onclick="RevAndComsInst().save_comment(event)">
+                        save modif
+                    </button>
+                    <button class="discard_comment" data-ci="discard_comment"
+                        onclick="RevAndComsInst().discard(event)">
+                        discard
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+function RevAndComs(){
+    var server_page = '/aucts/reviews.php';
+    var FC = '&#x2b24;';
+    var EC = '&#x2b58;';
+    var UP = '&#xfe3f;';
+    var DOWN = '&#xfe40;';
+    var self = this;
+    var __element;
+    var __good_id = -1;
+    
+    function element(){
+        if (typeof __element === 'undefined'){
+            __element = document.querySelector('.reviews');
+        }
+        return __element;
+    }
+    
+    var __model;
+    function model(){
+        if (typeof __model === 'undefined'){
+            var m = document.querySelector('.reviews .reviewContainer');
+            __model = m.cloneNode(true);
+            __model.classList.remove('model');
+            m.style.display = "none";
+        }
+        return __model;
+    }
+    
+    function my_info(){
+        if (typeof session__my_info !== 'undefined'){
+            return session__my_info();
+        }else{
+            return new Promise(function(resolve, reject){
+                resolve({name:'Anonymous'});
+            });
+        }
+    }
+    
+    function good_id(){
+        return __good_id;
+    }
+    
+    this.discard = function(ev){
+        var myNewEl = ev.target.parentNode.parentNode;
+        //console.log(myNewEl);
+        myNewEl.classList.add('hidden');
+    }
+    
+    function show_insertion_box(myNewEl){
+        if (myNewEl.classList.contains('hidden')){
+            myNewEl.classList.remove('hidden');
+        }else{//blink;
+            //myNewReviewEl.classList.add('hidden');
+            myNewEl.style.background = '#002266';
+            setTimeout(function (){
+                myNewEl.style.background = "";
+                }, 500);
+            return;
+        }
+        var user_name_el = myNewEl.getElementsByClassName('user_name')[0];
+        my_info().then(function(info){
+            user_name_el.innerHTML = info['name'];
+        });
+    }
+    
+    this.add_review = function(){
+        var myNewEl = element().getElementsByClassName('myNewReview')[0];
+        show_insertion_box(myNewEl);
+    }
+
+    this.add_comment = function(ev){
+        var reviewContainer = ev.target.parentNode.parentNode;
+        var myNewEl = reviewContainer.getElementsByClassName('myNewComment')[0];
+        show_insertion_box(myNewEl);
+    }
+    
+    this.get_subject_id = function(){
+        if (typeof get_product_id !== 'undefined'){
+            return get_product_id();
+        }
+    }
+
+    this.load_reviews = function(){
+        fetch_json(
+            {
+                reviews_op: 'load_revs',
+                gId: self.get_subject_id(),
+            }
+        ).then(function(resp){
+            self.display_json_resp(resp);
+        }, function(err){
+            console.log("Error:", err);
+        });
+    }
+
+    this.save_review = function(ev){
+        var box = ev.target.parentNode.parentNode;
+        var gid = self.get_subject_id();
+        var rev_id = box.parentNode.getAttribute('data-revId');
+        var text = box.getElementsByTagName('textarea')[0].value;
+        var note = box.getElementsByTagName('select')[0].value;
+        //console.log(rev_id, text);
+        fetch_json(
+            {
+                reviews_op: 'save_rev',
+                content: text,
+                note: note,
+                rev_id: rev_id,
+                gId: gid
+            }
+        ).then(function(arg){
+            //console.log(arg);
+        }, function(err){
+            console.log("Error:", err);
+        });
+    }
+
+    this.save_comment = function(ev){
+        //submit review or comment;
+        //ev.target.parentNode.getElementsByClassName('add_comment')[0].style.display = "inline";
+        //ev.target.style.display = "none";
+        var box = ev.target.parentNode.parentNode;
+        var rev_id = box.parentNode.getAttribute('data-revId');
+        var text = box.getElementsByTagName('textarea')[0].value;
+        //console.log(rev_id, text);
+        fetch_json(
+            {
+                reviews_op: 'save_com',
+                content: text,
+                gId: rev_id
+            }
+        ).then(function(arg){
+            //console.log(arg);
+        }, function(err){
+            console.log("Error:", err);
+        });
+    }
+
+    function toggle_view(ev, subj){
+        var btn = ev.target.nodeName === 'BUTTON' ? ev.target : ev.target.parentNode; 
+        //var coms = btn.parentNode.parentNode.getElementsByClassName('comments')[0];
+        if (btn.classList.contains('hidden')){
+            subj.classList.remove('hidden');
+            btn.classList.remove('hidden');
+        }else{
+            subj.classList.add('hidden');
+            btn.classList.add('hidden');
+        }
+    }
+
+    this.toggle_comments = function(ev){
+        var btn = ev.target.nodeName === 'BUTTON' ? ev.target : ev.target.parentNode; 
+        var coms = btn.parentNode.parentNode.getElementsByClassName('comments')[0];
+        toggle_view(ev, coms);
+    }
+
+    this.toggle_reviews = function(ev){
+        var btn = ev.target.nodeName === 'BUTTON' ? ev.target : ev.target.parentNode; 
+        var revs = element().getElementsByClassName('reviewContainer');
+        var dir = 0;
+        if (btn.classList.contains('hidden')){
+            btn.classList.remove('hidden');
+            dir = 1;
+        }else{
+            btn.classList.add('hidden');
+            dir = -1;
+        }
+        [].forEach.call(revs, function(e, i){
+            //console.log(i, e);
+            dir === 1 ? e.classList.remove('hidden') : e.classList.add('hidden');
+        });
+        //toggle_view(ev, revs);
+    }
+    this.toggle_editable = function(ev, btn){
+        console.log(btn);
+    }
+
+    function time_ago(ts){
+        if (!ts) return ts;
+        var dts = Date.now() / 1000 - ts;
+        var v = Math.floor(dts/60);
+        if (v < 2) return [0, 'now'];
+        if (v < 60) return [v, 'mins.'];
+        v = Math.floor(dts/3600);
+        if (v < 36) return [v, 'hours'];
+        v = Math.floor(dts/(3600*24));
+        if (v < 10) return [v, 'days'];
+        v = Math.floor(dts/(3600*24*7));
+        if (v < 6) return [v, 'weeks'];
+        v = Math.floor(dts/(3600*24*30));
+        if (v < 13) return [v, 'months'];
+        v = Math.floor(dts/(3600*24*365));
+        return [v, 'years'];
+    }
+    
+    function translated_time_ago(ts){
+        if (!ts) return ts;
+        var r = time_ago(ts);
+        if (!r[0]) return r[1];
+        return r[0] + ' ' + r[1];
+    }
+
+    function insert__rev_json(json){
+        var elem = model().cloneNode(true);
+        elem.getElementsByClassName('user_name')[0].innerHTML = json['name'];
+        elem.getElementsByClassName('date')[0].innerHTML = translated_time_ago(json['edTs']);
+        elem.getElementsByClassName('appreciation')[0].innerHTML = json['note'];
+        //elem.getElementsByTagName('textarea')[0].innerHTML = json['content'];
+        elem.getElementsByClassName('viewarea')[0].innerHTML = json['content'];
+        elem.getElementsByClassName('buttons')[0].style.display = "";
+        var rev_id = json['id'];
+        elem.setAttribute('data-revId', rev_id);
+        var revs_el = document.getElementsByClassName("reviews")[0];
+        revs_el.appendChild(elem);
+        var rc_el = revs_el.getElementsByClassName('reviews_count')[0];
+        rc_el.innerHTML = (parseInt(rc_el.innerHTML) || 0) + 1;
+        elem.getElementsByClassName('comments')[0].style.display = 'none';
+    }
+
+    function insert__com_json(json, elem){
+        var comments = elem.getElementsByClassName('comments')[0];
+        comments.style.display = '';
+        var nc = comments.getElementsByClassName('comment')[0].cloneNode(true);
+        var cc_el = elem.getElementsByClassName('comments_count')[0];
+        cc_el.innerHTML = (parseInt(cc_el.innerHTML) || 0) + 1;
+        if (cc_el.innerHTML == 1) comments.innerHTML = "";
+        nc.getElementsByClassName('user_name')[0].innerHTML = json['name'];
+        nc.getElementsByClassName('date')[0].innerHTML = translated_time_ago(json['edTs']);
+        nc.getElementsByClassName('appreciation')[0].innerHTML = json['note'];
+        //nc.getElementsByTagName('textarea')[0].innerHTML = json['content'];
+        nc.getElementsByClassName('viewarea')[0].innerHTML = json['content'];
+        //nc.getElementsByClassName('buttons')[0].style.display = "none";
+        comments.appendChild(nc);
+    }
+
+    this.display_json_resp = function(resp_json){
+        if (!resp_json[0]) return;
+        resp_json[0].forEach(function(e, i){
+            var usrId = e['usrId'];
+            for (var ix = 0; ix < resp_json[1].length; ix++){
+                if(resp_json[1][ix]['id'] === e['usrId']){
+                    e['name'] = resp_json[1][ix]['name'];
+                    break;
+                }
+            }
+        });
+        var revs_el = document.getElementsByClassName("reviews")[0];
+        revs_el.style.display = 'none';
+        var acc = 0, cnt = 0; 
+        resp_json[0].forEach(function(e, i){
+            if(e.gKind == 1){
+                insert__rev_json(e);
+                revs_el.style.display = '';
+                if (e.note !== null){
+                    acc += parseInt(e.note);
+                    cnt++;
+                }
+            }
+        });
+        if (cnt != 0){
+            revs_el.getElementsByClassName('reviews_overall')[0].innerHTML = (Math.floor(acc/cnt * 100)/100);
+        }
+        resp_json[0].forEach(function(e, i){
+            if(e.gKind == 0x8001){
+                revid = e.gId;
+                elem = document.querySelector(".reviewContainer[data-revId='"+revid+"']");
+                //console.log(elem);
+                insert__com_json(e, elem);
+            }
+        });
+    }
+
+    function fetch_json(params){
+        console.log(server_page, params);
+        return fetch(server_page, {
+            method: 'POST',
+            headers: {
+               'Accept': 'application/json',
+               'Content-Type': 'application/json',
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(params),
+        })
+        .then(function(resp){
+            if(resp.status != 200){
+                throw resp.status + ' ' + resp.statusText;
+            }
+            return resp.json();
+        })
+        .catch(function(err){
+            console.log("Loading json failed:", err);
+        });
+    }
+}
+
+var ___revAndComs_inst;
+function RevAndComsInst(){
+    if (typeof ___revAndComs_inst === 'undefined'){
+        ___revAndComs_inst = new RevAndComs();
+    }
+    return ___revAndComs_inst;
+}
+
+//RevAndComsInst().test();
+window.addEventListener('load', function(){
+    RevAndComsInst().load_reviews();
+});
+
+</script>

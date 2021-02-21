@@ -1,0 +1,149 @@
+/*BAD CODE DO NOT USE IT*/
+function TopBarToggler(middle_selector, top_selector, items_to_exchange, callback){
+
+    const mid_el = document.querySelector(middle_selector);
+    const top_el = document.querySelector(top_selector);
+    const __aprox_top_height = top_el.style.top;
+    const content = document.querySelector('#__bar_widget__');
+
+    var nw_items = [
+        {
+            'narrow_holder':document.querySelector("#narrow__search_bar_holder"),
+            'wide_holder':document.querySelector("#wide__search_bar_holder"),
+            'itself':document.querySelector("#search_bar_itself"),
+            'status':1,
+            'width_th':700
+        },
+        {
+            'narrow_holder':document.querySelector("#menu_buttons__dd"),
+            'wide_holder':document.querySelector("#menu_buttons__holder"),
+            'itself':document.querySelector("#menu_buttons"),
+            'status':1,
+            'width_th':700,
+            'callback':function(status){
+                document.querySelector('#menu_dd_button').style.display = (status === 1 ? 'none' : 'inline');
+                document.querySelector('#menu_buttons').style.display = (status === 1 ? 'inline-flex' : 'block');
+            }
+        }
+    ];
+
+    var __elements = [];
+    var __exchange_content = true;
+    items_to_exchange.forEach(function(e, i){
+    if (e === true){ __exchange_content = true; return;}
+        __elements.push(document.querySelectorAll(e));
+    });
+
+    var treshold = -100;
+    var __status = 1;//in page
+    function ev_handler(){
+        var prev_stat = __status;
+        var bcr = mid_el.getBoundingClientRect();
+        if (bcr.top < treshold && __status !== -1){
+            //console.log("top menu bar should appear");
+            toggle(mid_el, top_el);
+            top_el.style.top = 0;
+            __status = -1;
+        }else if (bcr.top > treshold && __status !== 1){
+            //console.log("in page menu bar should appear");
+            toggle(top_el, mid_el);
+            top_el.style.top = __aprox_top_height; //reset to hidden position
+            __status = 1;
+        }
+        if (prev_stat != __status){
+            if (callback) callback(__status);
+        }
+        
+    }
+
+    function exchange_items(){
+        return;
+        __elements.forEach(function(p, i){
+            if (p.length < 2) return;
+            var src = p[0].innerHTML.length > p[1].innerHTML.length ? src = 0 : 1;
+            var dst = 1 - src;
+            console.log(Math.round((+new Date())/1000), "src:", src, p[src].id, p[src].innerHTML.length,
+                "   DST:", dst, p[dst].id, p[dst].innerHTML.length);
+            console.log(p[src].childNodes.length);
+            var child_nodes = [];
+            [].forEach.call(p[src].childNodes, function(e,j){
+                child_nodes.push(e);
+            });
+            child_nodes.forEach(function (e,j){
+                p[dst].appendChild(e);
+            });
+            p[dst].parentNode.style.visible = 'hidden';
+            p[dst].parentNode.style.visible = '';
+        });
+    }
+
+    function toggle(src, dest){
+        if (__exchange_content)
+            //dest.style.width = '100%';
+            dest.appendChild(content);
+            //src.style.width = '0px';
+    }
+
+    function get_client_sizes(){
+        var w = window,
+        d = document,
+        e = d.documentElement,
+        g = d.getElementsByTagName('body')[0],
+        x = w.innerWidth || e.clientWidth || g.clientWidth,
+        y = w.innerHeight|| e.clientHeight|| g.clientHeight
+        return [x,y]
+    }
+
+    function __toggle_wide_narrow(index){
+        var d = nw_items[index];
+        var w = get_client_sizes()[0];
+        var next = 0;
+        if (w > d.width_th && d.status === -1){
+            next = 1;
+        }else if(w <= d.width_th && d.status === 1){
+            next = -1;
+        }
+        if (next != 0){
+            var src = (next ===  1) ? d.narrow_holder : d.wide_holder;
+            var dst = (next === -1) ? d.narrow_holder : d.wide_holder;
+            console.log(d.itself);
+            dst.appendChild(d.itself);
+            d.status = next;
+            if (d.hasOwnProperty('callback')) d.callback(next);
+        }
+    }
+
+    function toggle_wide_narrow(){
+        nw_items.forEach(function(e,i){
+            __toggle_wide_narrow(i);
+        });
+    }
+
+    function __nw_init(index){
+        var d = nw_items[index];
+        var w = get_client_sizes()[0];
+        if (w <= d.width_th){
+            d.narrow_holder.appendChild(d.itself);
+            if (d.hasOwnProperty('callback')) d.callback(-1);
+        }
+    }
+
+    function nw_init(){
+        nw_items.forEach(function(e,i){
+            __nw_init(i);
+        });
+    }
+
+    nw_init();
+
+    function evHnd(){
+        ev_handler();
+        toggle_wide_narrow();
+    }
+
+    addEventListener('DOMContentLoaded', evHnd, false);
+    addEventListener('load', evHnd, false);
+    addEventListener('scroll', evHnd, false);
+    addEventListener('resize', evHnd, false);
+
+}

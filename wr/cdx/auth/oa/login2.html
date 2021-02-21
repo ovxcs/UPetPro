@@ -1,0 +1,43 @@
+<html>
+
+<script src='/cdx/utils/utils.js'></script>
+<script>
+
+function getUrlParams( prop, str) {
+    var params = {};
+    var search = decodeURIComponent( str );
+    var definitions = search.split( '&' );
+    definitions.forEach( function( val, key ) {
+        var parts = val.split( '=', 2 );
+        params[ parts[ 0 ] ] = parts[ 1 ];
+    } );
+    return ( prop && prop in params ) ? params[ prop ] : params;
+}
+
+function redir(){
+    var params = "";
+    if (window.location.hash){
+        params = window.location.hash.substring(1);
+        if (params.indexOf('state') === -1){
+            params = "";
+        }
+    }
+    if (!params){
+        params = window.location.search.substring(1);
+    }
+    //MWTOKEN = 0;
+    //console.log(">>> to login2.php");
+    send_parameters('GET', '/auth/oa/login2.php', params + '&xhr=1',
+        function (recv, sent, arg){
+            var new_url = decodeURIComponent(recv['first_page']);
+            window.location.href = new_url;
+        }, 'tknClbk'
+    );
+}
+
+</script>
+
+<body onload="redir()">
+
+</body>
+</html>

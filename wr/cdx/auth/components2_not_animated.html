@@ -1,0 +1,277 @@
+<style>
+
+<!-- @import url('/cdx/fonts.css'); -->
+
+@import url('/fonts/google/Gruppo.css');
+
+:root{
+    --auth-color_buttons:rgb(0, 140, 140);
+    --auth-color_labels:rgb(80, 255, 255);
+    --auth-color_inputs:white;
+    --auth-background:rgba(0, 30, 40, 1);
+    --auth-color_menu_hover:white;
+}
+
+/*:root{
+    --auth-color_buttons:rgb(60, 180, 180);
+    --auth-color_labels:blue;
+    --auth-color_inputs:black;
+    --auth-background:white;
+    --auth-color_menu_hover:black;
+}*/
+
+:root{
+    --auth-frame-radius:5px;
+}
+
+td{
+    font-size: 20px;
+    color: white;
+    text-align:center;
+}
+td label {
+    font-family:Gruppo;
+    font-size:18px;
+}
+
+.animated_span{
+    font-size: 18px;
+    min-width: 600px;
+    min-height: 50px;
+    max-height: 50px;
+    overflow:hidden;
+    border-radius: 5px;
+    padding:0px;
+    padding-left: 5px;
+    border: 1px solid var(--auth-color_inputs);
+    color: var(--auth-color_inputs);
+    background:rgba(0, 0, 255, 1);
+    position:relative;
+    text-align:right;
+}
+
+.animated_span:hover{
+    background:red;
+}
+
+.animated_span div{
+    font-size:40px;
+    background:green;
+    width:100%;
+    text-align:center;
+    float:right;
+    margin-right:0px;
+    transition: font-size 1s, width 1s;
+}
+
+.animated_span:hover div{
+    width:50%;
+    font-size:15px;
+    transition: font-size 1s, width 1s;
+}
+
+
+.animated_span input{
+    margin:0px;
+    background:green;
+    height:0px;
+    border:none;
+    width:100%;
+    font-size:20px;
+    transition: height 1s;
+}
+
+.animated_span:hover input{
+    background:yellow;
+    display:block;
+    height:30px;
+    position:absolute;
+    bottom:0px;
+    transition: height 1s;
+}
+
+
+
+
+
+}
+/*
+td input:focus{
+    background: white;
+    color: black;
+}
+*/
+/*
+td input:hover::placeholder{
+    -webkit-transform:translate3d(0, -8px, 0) scale(.83333333);
+    transform:translate3d(0, -8px, 0) scale(.83333333);
+    color:red;
+}
+
+::-ms-input-placeholder:hover{
+    -webkit-transform:translate3d(0,-8px,0) scale(.83333333);
+    transform:translate3d(0,-8px,0) scale(.83333333);
+}
+*/
+
+#su_table td, #li_table td, #ipwr_table td, #reset_code_table td{
+    font-size: 19px;
+    color: var(--auth-color_labels);
+}
+
+#su_table td button, #li_table td button, #ipwr_table td button, #reset_code_table td button {
+    font-family:Gruppo;
+    font-width:900;
+    font-size: 22px;
+    color: var(--auth-color_buttons);
+    border:2px solid var(--auth-color_buttons);
+    background:rgba(255,0,0,0);
+}
+
+#su_table td button:hover, #li_table td button:hover, #ipwr_table td button:hover, #reset_code_table td button:hover {
+    font-family:Gruppo;
+    font-width:900;
+    font-size: 22px;
+    color:rgba(255,255,255,1);
+    background: var(--auth-color_buttons);
+}
+
+#auth_win_close_btn{
+    padding-left:10px;padding-right:10px;
+    color:gray;
+    border-top-left-radius:var(--auth-frame-radius);
+}
+#auth_win_close_btn:hover {
+    color:white;
+    background:red;
+}
+
+td [id^=auth_opt_]{
+    font-size:17px;
+    color:gray;
+}
+
+td [id^=auth_opt_]:hover{
+    color:var(--auth-color_menu_hover);
+}
+
+</style>
+
+<div id="auth_win" style="position:fixed;left:0;top:0;bottom:0;right:0;
+        width:100%;background:rgba(0,0,60,0.9);display:block;z-index:9999;height:100%">
+    <div style="position:relative;width:500px; margin:5% auto;text-align:center;
+        background:var(--auth-background);border-radius:var(--auth-frame-radius);min-height:500px">
+    <span id="auth_win_close_btn" onclick="auth_win_close()"
+        style="font-size:40px;font-weight:lighter;cursor:pointer;display:inline-block;float:left">
+        &#xd7;
+    </span>
+    <br>
+    <!-- <button onclick="clear_ls()"> Clear LS</button> -->
+    <div id="auth_info" style="color:white;font-size:25px;text-align:center;margin-top:20%;display:none">Info messages from server</div>
+    <div id="auth_errors" style="color:red;font-size:25px;text-align:center"></div>
+
+    <table id="auth_components" style="width:100%">
+    <tr><td valign="bottom" style="min-height:300px;text-align:center">
+        <div id='forms_comp'>
+            <!-- <div style="margin:auto;color:gray;font-size:25px">Account on this site</div> -->
+            
+            <div style="text-align:center;min-height:250px;border-color:grey;border-style:solid;border-radius:20px;border-width:1px">
+            <table id="su_table" style="display:none;margin:auto;margin-top:5%;">
+            <tr><td style="text-align:right" valign="top"><label data-ci="name">Name</label>&nbsp;&nbsp;</td>
+                <td><input type="text" name="name" id="su_name" placeholder="John Smith"></td></tr>
+            <tr><td style="text-align:right" valign="top"><label data-ci="existing_email">Existing&nbsp;email</label>&nbsp;&nbsp;</td>
+                <td><input type="text" name="email" id="su_email" placeholder="john.smith@example.com"></td></tr>
+            <tr><td style="text-align:right" valign="top"><label data-ci="chose_a_password">Choose&nbsp;a&nbsp;password</label>&nbsp;&nbsp;</td>
+                <td><input type="password" name="password" id="su_password1"></td></tr>
+            <tr><td style="text-align:right" valign="top"><label data-ci="retype_password">Retype&nbsp;password</label>&nbsp;&nbsp;</td>
+                <td><input type="password" name="password" id="su_password2"></td></tr>
+            <tr><td></td><td style="text-align:right"><button onclick="sign_up(this)"> Sign up </button></td></tr>
+            </table>
+
+            <table id="li_table" style="margin:auto;margin-top:15%;">
+            <!--<tr><td><label>Înregistrare Recuperare parolă</label></td></tr>-->
+            <tr>
+                <td style="text-align:right;display:none" valign="top"><label>Email</label>&nbsp;&nbsp;</td>
+                <td><div class='animated_span'>
+                    <div>Email</div>
+                    <input type="text" name="email" id="li_email" placeholder="john.smith@example.com">
+                </div></td>
+            </tr>
+            <tr>
+                <td style="text-align:right;display:none" valign="top"><label data-ci="password">Password</label>&nbsp;&nbsp;</td>
+                <td><div class='animated_span'>
+                <td><input type="password" name="password" id="li_password" placeholder="*****"></td></tr>
+            <tr><td></td><td style="text-align:right"><button onclick="login(this)"> Login </button></td></tr>
+            </table>
+            
+
+            <table id="ipwr_table" style="display:none;margin:auto;margin-top:18%;">
+            <tr><td style="text-align:right;" valign="top"><label>Email</label>&nbsp;&nbsp;</td>
+                <td><input type="text" name="email" id="ipwr_email"></td></tr>
+            <tr><td></td><td style="text-align:right"><button data-ci="send_recovery_mail" onclick="pw_recovery_init(this)">Send recovery email</button></td></tr>
+            </table>
+
+            
+            <table id="reset_code_table" style="display:none;margin:auto;margin-top:5%;">
+            <tr><td style="text-align:right" valign="top"><label>Email</label>&nbsp;&nbsp;</td><td><input type="text" name="email" id="pwr_email"></td></tr>
+            <tr><td style="text-align:right" valign="top"><label data-ci="recovery_code">Recovery code&nbsp;&nbsp;</label>&nbsp;&nbsp;</td><td><input type="text" name="pwr_code" id="pwr_code"></td></tr>
+            <tr><td style="text-align:right" valign="top"><label data-ci="chose_a_password">Choose&nbsp;a&nbsp;password</label>&nbsp;&nbsp;</td>
+                <td><input type="password" name="password" id="pwr_password1"></td></tr>
+            <tr><td style="text-align:right" valign="top"><label data-ci="retype_password">Retype&nbsp;password</label>&nbsp;&nbsp;</td>
+                <td><input type="password" name="password" id="pwr_password2"></td></tr>
+            <tr><td></td><td style="text-align:right"><button onclick="pw_reset_new_pw(this)"> Reset </button></td></tr>
+            </table>
+            </div>
+
+            <div style="width:100%;text-align:right;">
+            <table id="auth_menu" style="float:right"><tr>
+            <td><div id="auth_opt_logIn" style="cursor:pointer;display:none" onclick="auth_show_inputs(this)">
+                &nbsp;&nbsp;&nbsp;<label style="cursor:pointer">Login</label>&nbsp;&nbsp;&nbsp;</div></td>
+            <td><div id="auth_opt_signUp" style="cursor:pointer" onclick="auth_show_inputs(this)">
+                &nbsp;&nbsp;&nbsp;<label style="cursor:pointer">Sign up</label>&nbsp;&nbsp;&nbsp;</div></td>
+            <td><div id="auth_opt_recoveryPwInit" style="cursor:pointer" onclick="auth_show_inputs(this)">
+                &nbsp;&nbsp;&nbsp;<label style="cursor:pointer" data-ci="password_recovery">Password recovery</label>&nbsp;&nbsp;&nbsp;</div></td>
+            <!-- <td id="auth_opt3" data-auth-inputs='resetPwCode' style="cursor:pointer" onclick="auth_show_inputs(this)">Reset password</td> -->
+            </tr></table>
+            </div>
+
+        </div>
+    </td></tr>
+    <tr><td>
+        <div style="margin:auto;color:gray">_________________________________________________</div>
+        <br>
+    </td></tr>
+    <tr><td>
+        <div id="oauth" style="color:white;font-size:20px;text-align:center;">
+            <table style="margin:auto">
+                <!-- <tr><td style="color:gray;font-size:25px;text-align:center" colspan="4">External account</td></tr> -->
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                <td onclick="login_with('facebook')">&nbsp;&nbsp;&nbsp;
+                    <img height="48" style="cursor:pointer" src="../../res/_/facebook.jpg"> &nbsp;&nbsp;</td>
+                <td onclick="login_with('google')" >&nbsp;&nbsp;&nbsp;
+                    <img height="48" style="cursor:pointer" src="../../res/_/google.jpg"> &nbsp;&nbsp;</td>
+                <td onclick="login_with('twitter')" >&nbsp;&nbsp;&nbsp;
+                    <img height="48" style="cursor:pointer" src="../../res/_/twitter.jpg"> &nbsp;&nbsp;</td>
+                <!-- <td><img height="42" style="cursor:pointer" onclick="login_with('microsoft')" src="../../res/_/microsoft.jpg"> &nbsp;&nbsp;</td> -->
+                <td onclick="login_with('amazon')" >&nbsp;&nbsp;&nbsp;
+                    <img height="48" style="cursor:pointer" src="../../res/_/amazon.jpg"> &nbsp;&nbsp;</td>
+                <td onclick="login_with('linkedin')" >&nbsp;&nbsp;&nbsp;
+                    <img height="48" style="cursor:pointer" src="../../res/_/linkedin.jpg"> &nbsp;&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+    </td></tr>
+    
+    
+    </table>
+    </div>
+    <form id="auth_new_page_requester" method="get" action="no-action" >
+        <input id="anpr1" type="hidden">
+        <input id="anpr2" type="hidden">
+        <input id="anpr3" type="hidden">
+        <input id="anpr4" type="hidden">
+    </form>
+    
+    <img src onerror='enable_auth_view()'>
+</div>

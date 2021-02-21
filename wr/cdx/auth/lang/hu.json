@@ -1,0 +1,11 @@
+{
+    ":fallback":"ro",
+    "name":"Név",
+    "existing_email" :"Email cím",
+    "chose_a_password":"Jelszót",
+    "retype_password":"erősítés",
+    "password": "Jelszót",
+    "password_recovery":"Jelszó visszaállítás",
+    "send_recovery_mail":"Küldjön e-mailt",
+    "sign_up":"Regisztráció"
+}

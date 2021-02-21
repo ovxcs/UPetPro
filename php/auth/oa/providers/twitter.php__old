@@ -1,0 +1,44 @@
+<?php
+
+require_once __DIR__.'/../provider_class.php';
+
+require_once __DIR__."/twitteroauth/autoload.php";
+require_once __DIR__."/twitteroauth/src/TwitterOAuth.php";
+
+class Twitter extends Provider{
+
+const name = 'twitter';
+const ID_KEY = 'id_str';
+const PIC_KEY = 'profile_image_url';
+const NAME_KEY = 'name';
+const EMAIL_KEY = null;
+
+public function req_user_info($dict){
+    global $TWITTER_CONSUMER_KEY, $TWITTER_CONSUMER_SECRET,
+        $OAUTH_REDIRECT_URI;
+    $state = $dict['state'];
+    //$prov = new Provider($state);
+    $oauth_token_secret = $this->oa_db_if->get_oauth_exchange_token($state, 'code');
+    $oauth_token = $this->oa_db_if->get_oauth_exchange_token($state, 'access_token');
+    error_log('from DB: '.$oauth_token.' > '.$oauth_token_secret);
+    $toa = new \Abraham\TwitterOAuth\TwitterOAuth($TWITTER_CONSUMER_KEY, $TWITTER_CONSUMER_SECRET,
+        $oauth_token, $oauth_token_secret);
+    $access_token = $toa->oauth('oauth/access_token', ['oauth_verifier' => $dict['oauth_verifier']]);
+    error_log(json_encode($access_token));
+    $toa2 = new \Abraham\TwitterOAuth\TwitterOAuth($TWITTER_CONSUMER_KEY, $TWITTER_CONSUMER_SECRET,
+        $access_token['oauth_token'], $access_token['oauth_token_secret']);
+    $params = array('include_entities'=>'true', 'include_email'=>'true');
+    $content = $toa2->get('account/verify_credentials', $params);
+    return $this->filter_user_info((json_decode (json_encode($content), true)));
+}
+
+public function get_user_info($state){
+    $ver = $this->oa_db_if->get_oauth_exchange_token($state, 'verifier');
+    //error_log('verifier:'.$ver);
+    $jsx = $this->req_user_info(['oauth_verifier' => $ver,
+        'state' => $state]);
+    return $jsx;
+}
+
+}
+?>

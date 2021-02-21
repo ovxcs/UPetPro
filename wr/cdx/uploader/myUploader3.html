@@ -1,0 +1,96 @@
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/cdx/uploader/uploader3.js"></script>
+<link rel="stylesheet" type="text/css" href="/cdx/uploader/uploader3.css">
+</head>
+
+
+<style>
+
+#myUploadPics, #myUploadPics .cell{
+    cursor:pointer;
+}
+
+#myUploadPics .cell{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-evenly;
+}
+
+#myUploadPics .cell.model{
+    display:none;
+    background:yellow;
+}
+
+#uploader_win{
+    background:rgba(0, 20, 30, 0.95);
+}
+
+#uploader_win .closed{
+    background:rgba(0, 20, 30, 0.1);
+    transition: background 2s;
+}
+
+body.modal-open{
+    overflow-y:hidden;
+}
+
+</style>
+
+<div id="uploader_win" style="position:fixed;top:0;left:0;z-index:9999;
+            width:100%;height:100%;overflow-y:auto">
+
+<div id="uploader_errors"></div>
+<div class="flexTableContiner uploaderTable" id="myUploadPics">
+    <div class="cell model" style="position:relative">
+        <!--div class="content wrap">
+        </div-->
+        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" />
+        <div class="controls">
+            <span class="marker" onclick="myPicsUploader().mark(event, this)">&nbsp;&#x2713;&nbsp;</span>
+            <span class="remover" onclick="myPicsUploader().remove(event, this)">&nbsp;&#x2717;&nbsp;</span>
+        </div>
+    </div>
+    <div class="cell last" style="min-height:200px">
+        <!--input class="file_input" type="file" name="fileToUpload" style='display:none'
+                onchange = "UploaderTableInst(this.parentNode.parentNode.id).file_selection_done(this)" multiple-->
+        <div class="wip" style="min-height:97px;font-size:20px;
+                                background:orange;position:relative;margin:auto">
+            <div class="work_in_progress loader1"></div>
+            <div class="work_in_progress loader2"></div>
+        </div>
+        <div class="buttons">
+            <div class="adder">
+                &#x2795;&#x1f5bc;
+            </div>
+            <div class="done" onclick="myPicsUploader().done(event, this)">
+                OK
+            </div>
+        </div>
+    </div>
+</div>
+<!-- button onclick="UploaderTableInst('myUploadPics').clear()"> Clean </button -->
+
+</div> <!-- end of uploader win -->
+
+<script>
+window.addEventListener("load", function(){
+    //UploaderTableInst('myUploadPics');
+    //test__random_inserts('myUploadPics', 3);
+});
+function myPicsUploader(){
+    return UploaderTableInst('myUploadPics')
+}
+</script>
+
+
+
+
+
+
+
+
+
+

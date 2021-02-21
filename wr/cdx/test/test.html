@@ -1,0 +1,24 @@
+<html>
+
+<script>
+
+var new_script = "<button onclick='console.log(\"gg\"); xxx();'> New </button> <scr"+"ipt> function xxx(){ console.log('Hello from the new script!');}</scr"+"ipt>";
+
+function test_imp(){
+    console.log("testing...");
+    document.getElementById("new_content").innerHTML = new_script;
+    console.log(document.getElementById("new_content").innerHTML);
+}
+
+</script>
+
+<body>
+Hello!!
+<button onclick="test_imp();"> Load
+</button>
+<button onclick="xxx();"> Run
+</button>
+<div id="new_content">
+</div>
+</body>
+</html>

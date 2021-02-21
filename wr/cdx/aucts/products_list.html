@@ -1,0 +1,118 @@
+<script src='/cdx/lang/lang.js'></script>
+<script src='/cdx/utils/utils.js'></script>
+<script src='/cdx/utils/time.js'></script>
+
+<script src='/cdx/aucts/products_list.js'></script>
+<script src='/cdx/aucts/product_registration.js'></script>
+
+<link rel='stylesheet' href='/cdx/aucts/products_list.css'>
+<meta class="dictionaries" content="lang">
+
+<div class="component_holder" data-src="/cdx/common/default__top.html"></div><br><br><br>
+
+<div id="products__models" style="display:none;background:black">
+    <div class="products__grid_cell"
+                style="display:flex;flex:1;justify-content:space-around;">
+        <div class="cell__first_comp"
+                style="padding:1px;flex:1;
+                display:flex;align-items:center;justify-content:space-around;">
+            <div>
+                <!--img style="max-height:130px;max-width:190px;margin:5px" src=""-->
+                <img style="object-fit:cover" src="">
+                <div class="no_pict_alt" style="display:none;padding:10px;background:gray">
+                    <div data-ci="no_pict">No pict.</div>
+                </div>
+            </div>
+        </div>
+        <div class="cell__second_comp" style="flex:1">
+            <div class="numbers">
+                <div class="card">
+                    <div data-ci="ends_in">Ends in:</div>
+                    <div class="products__eta">
+                        40h:60m:30s
+                    </div>
+                </div>
+                <div class="card">
+                    <div data-ci="starting_price">Starting price:</div>
+                    <div class="products__starting_price">
+                        <span> 780.000 </span>
+                        <span style="font-family:arial;font-size:12px;">
+                            EUR
+                        </span>
+                    </div>
+                    <div>Crt. bid:</div>
+                    <div class="products__crt_bid">
+                        <span> 1.080.500 </span>
+                        <span style="font-family:arial;font-size:12px;">
+                            EUR
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="bid__inputs" style="text-align:center;">
+                <span style="display:inline-flex;">
+                    <span class="bid__valut" style="">
+                        EUR:
+                    </span>&nbsp;
+                    <input style="width:85px;" type="number">
+                    <button data-ci="bid_button"
+                            onclick="ProductsInst().on_bid_button_click(event,this)">
+                        Bid
+                    </button>
+                </span>
+            </div>
+            <div class="bid__errors" style="display:none">
+            </div>
+        </div>
+        <div class="cell__third_comp" onclick="ProductsInst().open_item(event,this)" 
+                    style="cursor:pointer;flex:1;display:flex;flex-flow:column;">
+            <div style="flex:5">
+                <div class="bookmark"
+                        onclick="ProductsInst().togggle_bookmark(event,this)"
+                        style="float:right;cursor:pointer;font-size:30px;
+                            padding:3px 3px 7px 9px;border-radius: 0 0 0 50px;
+                            line-height:90%;text-align:center;">
+                    <div>&#x2606;</div>
+                    <div>&#x2605;</div>
+                </div>
+                <div class="name wordwrap" style="margin-top:10px;">
+                </div>
+                <div class="" style="padding-top:10px;">
+                    str. Alexandru Ioan Buzzescu, nr. 2F07, Deva
+                </div>
+            </div>
+            <div class="bottom_numbers"
+                    style="display:flex;padding-right:5px;
+                        flex:1">
+                <span class="evaluation_circles" style="flex:4">
+                    <span data-ci="no rev."></span>
+                    <span></span>
+                </span>
+                <div style="text-align:right;flex:2">
+                    <span class="ID" style="font-size:10px;color:#AAAAAA;">
+                    </span>
+                    <br>
+                    <span style="display:none">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div> <!--  grid_cell ends -->
+</div>
+
+<div id="products__component" style="width:100%;margin-top:5px;">
+    <div class="tester" style="width:40%;">
+        <!--button onclick="products_placements__test('load');">load json</button>
+        <button onclick="g_products_placements.request_list();">load json 2</button -->
+    </div>
+    <div class="component_holder" data-src="/cdx/aucts/pagination.html"
+            data-list_loader_singleton="ProductsInst()"></div>
+    <br>
+    <div id="aucts_table" style="margin:auto;display:flex;flex-wrap:wrap;justify-content:center">
+    </div>
+    <br>
+    <div class="component_holder" data-src="/cdx/aucts/pagination.html"
+            data-list_loader_singleton="ProductsInst()"></div>
+    <br>
+    <br>
+</div>

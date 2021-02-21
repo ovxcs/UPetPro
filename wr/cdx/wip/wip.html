@@ -1,0 +1,36 @@
+<style>
+.loader {
+    border: 4px solid #FDDBB9;
+    border-radius: 50%;
+    /*border-image: linear-gradient(to right, red, yellow) 1;*/
+    position:fixed;
+    /*box-shadow: 0 -15 10px rgb(0,255,180);*/
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+
+<div id="working" style="z-index:2000;height:100%;margin:0px;
+        position:absolute;left:0;top:0px;width:100%;display:none;
+        cursor:wait">
+<div style="position:absolute;left:45%;top:30%;width:120px;height:120px;">
+<div class="loader" style="width:120px;height:120px;margin: 0;animation-duration:3s;
+    border-left-color:var(--loader_color);animation-timing-function:ease-in-out"></div>
+<div class="loader" style="width:110px;height:110px;margin: 5px;animation-duration:7s;animation-direction:reverse;
+    border-top-color:var(--loader_color);border-right-color:var(--loader_color);animation-timing-function:ease-in-out"></div>
+<!--<div class="loader" style="width:100;height:100;margin:10;animation-duration:9s;
+    border-right-color:red;border-bottom-color:red"></div>-->
+</div>
+</div>
