@@ -54,11 +54,12 @@ function __send_mail_with_extern($to, $subj, $body, $our_email, $our_pw, $our_na
     if (!$host) return false;
     $m = new PHPMailer\PHPMailer\PHPMailer(TRUE); //true - enables exceptions
     $m->IsSMTP();
+    $m->mailer = "smtp";
     $m->Host = $host;
     $m->SMTPAuth = true;
     $m->Username = $our_email;
     $m->Password = $our_pw;
-    
+    $m->SMTPDebug = 1;
     $m->SMTPSecure = $secu;//PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
     $m->Port       = $port;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS
     
@@ -75,10 +76,18 @@ function __send_mail_with_extern($to, $subj, $body, $our_email, $our_pw, $our_na
 
 }
 
-function send_mail($to, $subj, $body){
-    __send_mail($to, $subj, $body);
+
+function send_mail_with_extern($to, $subj, $body){
+    #global $g_our_email, $g_our_pw, $g_our_name;
+    __send_mail_with_extern($to, $subj, $body, 
+        g_OUR_EXT_EMAIL, g_OUR_EXT_EMAIL_PW, g_OUR_SENDER_NAME);
 }
 
+
+function send_mail($to, $subj, $body){
+    #__send_mail($to, $subj, $body);
+    send_mail_with_extern($to, $subj, $body);
+}
 
 
 function test(){

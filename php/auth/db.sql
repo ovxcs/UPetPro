@@ -33,9 +33,12 @@ CREATE TABLE groups(
     id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL UNIQUE,
     name char(16) UNIQUE,
     flags BIGINT UNSIGNED DEFAULT 0,
-    users_c INT UNSIGNED DEFAULT 0,
-    users varchar(2048) DEFAULT ',',
-    admins varchar(128) DEFAULT ','
+);
+
+CREATE TABLE user_groups(
+    uid BIGINT,
+    gid BIGINT,
+    flags BIGINT UNSIGNED DEFAULT 0, 
 );
 
 CREATE TABLE attempts(

@@ -9,9 +9,8 @@ class RandClients extends RandObjs {
         //dbgmsg($data['age']);
         return (new \DateTime())->sub(new \DateInterval(
                 "P{$age[0]}Y{$age[1]}M"))->format('Y-m-d');
-        
     }
-    
+
     static function rand_birthdate(){
         return self::age_to_birdate([rand(5,78), rand(0,11)]);
     }

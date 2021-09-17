@@ -248,6 +248,7 @@ function Products(){
         }
         ev.stopPropagation();
     }
+
     this.open_item = function(ev, el){
         var cell = owner_cell(el);
         window.location.href = "/cdx/aucts/product_registration.html?mode=view&gid=" + cell.getAttribute('data-goodId');

@@ -104,14 +104,12 @@ function process_img(canvas_el){
         //process
     }
     var x = {count : w*h*4, acc_r : ra, acc_g : ga, acc_b : ba, acc_a : aa};
-
     return x;
 }
 
 function process(name, canvas_obj){
     var holder = document.getElementById(name);
     var sel = canvas_obj.sel;
-
     copy_clip(canvas_obj.canvas , holder,
                 sel.startX, sel.startY, sel.w, sel.h
         );
@@ -123,7 +121,6 @@ function process(name, canvas_obj){
     }else{
         numbers = numbers[0];
     }
-
     numbers.innerHTML = "R:" + Math.floor(x.acc_r/x.count) +
                         ', G:' + Math.floor(x.acc_g/x.count) +
                         ', B:' + Math.floor(x.acc_b/x.count);

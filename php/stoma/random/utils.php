@@ -22,7 +22,7 @@ function getRandFrom($array){
 }
 
 function gen_rand_tel(){
-	return "07".genRndStr(2,'689').genRndStr(7);
+    return "07".genRndStr(2,'689').genRndStr(7);
 }
 
 function flush_buffers(){

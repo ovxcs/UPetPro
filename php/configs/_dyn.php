@@ -5,10 +5,12 @@ require_once __DIR__."/_defs.php";
 function load_guessed_config(){
 
     global $CONFIGS_DEFS;
+    error_log(print_r($CONFIGS_DEFS, true));
+    error_log(" ==================== ");
     $server_name = $_SERVER['SERVER_NAME'];
     $server_port = $_SERVER['SERVER_PORT'];
     $host = $_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'];
-
+    
     foreach($CONFIGS_DEFS as $cfg){
         foreach($cfg['regex'] as $regex){
             //echo($regex);

@@ -11,7 +11,7 @@ $APP_NAME = 'No name app';
 //$HOST_SRC = "$HOST/cdx";
 const FIRST_PAGE_AFTER_LOGIN = "/cdx/home.html";
 
-$PICS_HOST = 'http://10.73.37.221:8083';
+$PICS_HOST = 'http://10.82.28.221:8085';
 $UPLOAD_DIR = "h:/new/M/ED/0/uploads";
 $UPLOAD_URL = "$PICS_HOST/uploads";
 
@@ -24,8 +24,8 @@ $UPLOAD_URL = "$PICS_HOST/uploads";
 $NO_REPLY_ADDR = 'no-reply@educks.com';
 
 
-require_once __DIR__.'/auth/oa/config.php';
-require_once __DIR__.'/../../0/secrets/.__secrets__.php';
+require_once __DIR__.'/../auth/oa/config.php';
+require_once __DIR__.'/../../../0/secrets/.__secrets__.php';
 
 
 

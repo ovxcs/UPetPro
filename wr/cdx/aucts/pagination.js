@@ -47,6 +47,7 @@ function PagesSelector(selector){
         self.build(related_list_loader_singleton().pages,
                 related_list_loader_singleton().request_list);
     }
+
     this.build = function(json, updater){
         if (json === 0){
             self.element.style.display = 'none';

@@ -18,7 +18,7 @@ class Session{
         $ctsns = time();//hrtime();
         $atsns = $ctsns;
         $flags = self::ENABLED; 
-        $res = $dbif->conn->query("INSERT INTO sessions(mwt, ctsns, atsns, aid, flags) 
+        $res = $dbif->conn->query("INSERT INTO sessions(mwt, ctsns, atsns, aid, flags)
             VALUES('$can', $ctsns, $atsns, $account_id, $flags)");
         if (!$res){
             dbgmsg($dbif->conn->error);
